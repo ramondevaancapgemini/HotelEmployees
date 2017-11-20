@@ -23,8 +23,8 @@ export class EmployeeIndexComponent implements OnInit {
 
   getEmployees(): void {
     this.employeeService.getEmployees()
-      .subscribe(employees => {
-        this.employees = employees;
+      .subscribe(userData => {
+        this.employees = userData.employees;
         this.dtTrigger.next();
       });
   }

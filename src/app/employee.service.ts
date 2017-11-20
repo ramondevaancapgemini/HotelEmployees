@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {LoggingService} from "./logging.service";
-import {Observable} from "rxjs/Observable";
-import {Employee} from "./Employee";
-import {catchError, map, tap} from "rxjs/operators";
-import {of} from "rxjs/observable/of";
+import { LoggingService } from "./logging.service";
+import { Observable } from "rxjs/Observable";
+import { Employee } from "./Employee";
+import { catchError, map, tap } from "rxjs/operators";
+import { of } from "rxjs/observable/of";
+import { UserData } from './UserData';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,19 +13,28 @@ const httpOptions = {
 
 @Injectable()
 export class EmployeeService {
-  private employeesUrl = 'api/employees';  // URL to web api
+  private employeesUrl = 'https://reqres.in/api/users';  // URL to web api
 
   constructor(
     private http: HttpClient,
     private loggingService: LoggingService) { }
 
   /** GET employees from the server */
-  getEmployees (): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.employeesUrl)
+  getEmployees(): Observable<UserData> {
+    return this.http.get<UserData>(this.employeesUrl)
       .pipe(
-        tap(employees => this.log(`fetched employees`)),
-        catchError(this.handleError('getEmployees', []))
+      tap(employees => this.log(`fetched employees`)),
+      catchError(this.handleError('getEmployees', [])),
+      map(extractData)
       );
+
+    function extractData(body): UserData {
+      let users = body.data.map(user => {
+        return { id: user.id, firstName: user.first_name, lastName: user.last_name }
+      });
+
+      return { currentPage: body.page, totalPages: body.total_pages, employees: users };
+    }
   }
 
   /** GET employee by id. Return `undefined` when id not found */
@@ -32,12 +42,12 @@ export class EmployeeService {
     const url = `${this.employeesUrl}/?id=${id}`;
     return this.http.get<Employee[]>(url)
       .pipe(
-        map(employees => employees[0]), // returns a {0|1} element array
-        tap(h => {
-          const outcome = h ? `fetched` : `did not find`;
-          this.log(`${outcome} employee id=${id}`);
-        }),
-        catchError(this.handleError<Employee>(`getEmployee id=${id}`))
+      map(employees => employees[0]), // returns a {0|1} element array
+      tap(h => {
+        const outcome = h ? `fetched` : `did not find`;
+        this.log(`${outcome} employee id=${id}`);
+      }),
+      catchError(this.handleError<Employee>(`getEmployee id=${id}`))
       );
   }
 
@@ -65,7 +75,7 @@ export class EmployeeService {
   //////// Save methods //////////
 
   /** POST: add a new employee to the server */
-  addEmployee (employee: Employee): Observable<Employee> {
+  addEmployee(employee: Employee): Observable<Employee> {
     return this.http.post<Employee>(this.employeesUrl, employee, httpOptions).pipe(
       tap((employee: Employee) => this.log(`added employee w/ id=${employee.id}`)),
       catchError(this.handleError<Employee>('addEmployee'))
@@ -73,7 +83,7 @@ export class EmployeeService {
   }
 
   /** DELETE: delete the employee from the server */
-  deleteEmployee (employee: Employee | number): Observable<Employee> {
+  deleteEmployee(employee: Employee | number): Observable<Employee> {
     const id = typeof employee === 'number' ? employee : employee.id;
     const url = `${this.employeesUrl}/${id}`;
 
@@ -84,7 +94,7 @@ export class EmployeeService {
   }
 
   /** PUT: update the employee on the server */
-  updateEmployee (employee: Employee): Observable<any> {
+  updateEmployee(employee: Employee): Observable<any> {
     return this.http.put(this.employeesUrl, employee, httpOptions).pipe(
       tap(_ => this.log(`updated employee id=${employee.id}`)),
       catchError(this.handleError<any>('updateEmployee'))
@@ -97,7 +107,7 @@ export class EmployeeService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
