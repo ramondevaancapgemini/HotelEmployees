@@ -11,9 +11,9 @@ import { Subject } from 'rxjs';
 })
 export class EmployeeIndexComponent implements OnInit {
 
-  dtOptions: DataTables.Settings = {};
-  employees: Employee[];
-  dtTrigger: Subject<Employee> = new Subject();
+  // dtOptions: DataTables.Settings = {};
+  employees: Employee[] = [{id: 1, firstName: "a", lastName: "b"}];
+  // dtTrigger: Subject<Employee> = new Subject();
 
   constructor(private employeeService: EmployeeService) { }
 
@@ -23,9 +23,10 @@ export class EmployeeIndexComponent implements OnInit {
 
   getEmployees(): void {
     this.employeeService.getEmployees()
-      .subscribe(employees => {
-        this.employees = employees;
-        this.dtTrigger.next();
+      .subscribe(data => {
+        console.log("Done");
+        // this.employees = employees;
+        // this.dtTrigger.next();
       });
   }
 
@@ -35,12 +36,12 @@ export class EmployeeIndexComponent implements OnInit {
   //    this.employeeService.addEmployee({ givenName } as Employee)
   //      .subscribe(hero => {
   //        this.heroes.push(hero);
-  //      });
+  //      }); 
   //  }
-
-  delete(employee: Employee): void {
-    this.employees = this.employees.filter(h => h !== employee);
-    this.employeeService.deleteEmployee(employee).subscribe();
-  }
+  
+  // delete(employee: Employee): void {
+  //   this.employees = this.employees.filter(h => h !== employee);
+  //   this.employeeService.deleteEmployee(employee).subscribe();
+  // }
 
 }
