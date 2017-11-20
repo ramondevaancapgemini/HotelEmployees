@@ -1,20 +1,18 @@
 <h2>Employees</h2>
 
-<div>
-  <label>Employee name:
-    <input #employeeName />
-  </label>
-  <!-- (click) passes input value to add() and then clears the input -->
-  <button>
-    add
-  </button>
-</div>
-
-<ul class="employees">
-  <li *ngFor="let employee of employees">
-    <a routerLink="/detail/{{employee.id}}">
-      <span class="badge">{{employee.id}}</span> {{employee.first_name}} {{employee.last_name}}
-    </a>
-    <button class="delete" title="delete employee">x</button>
-  </li>
-</ul>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>First name</th>
+      <th>Last name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of employees">
+      <td>{{ employee.id }}</td>
+      <td>{{ employee.first_name }}</td>
+      <td>{{ employee.last_name }}</td>
+    </tr>
+  </tbody>
+</table>

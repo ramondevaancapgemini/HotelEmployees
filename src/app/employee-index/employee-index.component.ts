@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from '../Employee';
 import { EmployeeService } from '../employee.service';
 
+import { Subject } from 'rxjs';
+
 @Component({
   selector: 'app-employee-index',
   templateUrl: './employee-index.component.html',
@@ -9,19 +11,24 @@ import { EmployeeService } from '../employee.service';
 })
 export class EmployeeIndexComponent implements OnInit {
 
+  dtOptions: DataTables.Settings = {};
   employees: Employee[];
-  
-   constructor(private employeeService: EmployeeService) { }
-  
-   ngOnInit() {
-     this.getEmployees();
-   }
-  
-   getEmployees(): void {
-     this.employeeService.getEmployees()
-     .subscribe(employees => this.employees = employees);
-   }
-  
+  dtTrigger: Subject<Employee> = new Subject();
+
+  constructor(private employeeService: EmployeeService) { }
+
+  ngOnInit() {
+    this.getEmployees();
+  }
+
+  getEmployees(): void {
+    this.employeeService.getEmployees()
+      .subscribe(employees => {
+        this.employees = employees;
+        this.dtTrigger.next();
+      });
+  }
+
   //  add(name: string): void {
   //    name = name.trim();
   //    if (!name) { return; }
@@ -30,10 +37,10 @@ export class EmployeeIndexComponent implements OnInit {
   //        this.heroes.push(hero);
   //      });
   //  }
-  
-   delete(employee: Employee): void {
-     this.employees = this.employees.filter(h => h !== employee);
-     this.employeeService.deleteEmployee(employee).subscribe();
-   }
+
+  delete(employee: Employee): void {
+    this.employees = this.employees.filter(h => h !== employee);
+    this.employeeService.deleteEmployee(employee).subscribe();
+  }
 
 }

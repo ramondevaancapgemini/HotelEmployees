@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { DataTablesModule } from 'angular-datatables';
 
 import { AppComponent } from './app.component';
 import { EmployeeIndexComponent } from './employee-index/employee-index.component';
@@ -29,6 +30,7 @@ import { RoutingModule } from './routing/routing.module';
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
     ),
+    DataTablesModule,
   ],
   declarations: [
     AppComponent,
