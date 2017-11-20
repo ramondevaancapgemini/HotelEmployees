@@ -1,3 +1,20 @@
-<p>
-  employee-index works!
-</p>
+<h2>Employees</h2>
+
+<div>
+  <label>Employee name:
+    <input #employeeName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="">
+    add
+  </button>
+</div>
+
+<ul class="employees">
+  <li *ngFor="let employeee of employees">
+    <a routerLink="/detail/{{employee.id}}">
+      <span class="badge">{{employee.id}}</span> {{employee.firstName}}
+    </a>
+    <button class="delete" title="delete employee" (click)="">x</button>
+  </li>
+</ul>
