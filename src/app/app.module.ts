@@ -16,9 +16,9 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
-import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RoutingModule } from './routing/routing.module';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -39,7 +39,8 @@ import { RoutingModule } from './routing/routing.module';
     EmployeeEditComponent,
     EmployeeDetailComponent,
     EmployeeDeleteComponent,
-    DashboardComponent
+    DashboardComponent,
+    NavbarComponent
   ],
   providers: [
     EmployeeService,
