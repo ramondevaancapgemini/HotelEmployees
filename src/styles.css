@@ -6,3 +6,17 @@
 .content h2 {
     text-align: center;
 }
+
+.content table {
+    margin-top: 20px;
+}
+
+.content table th {
+    background: #505050;
+    border-color: #505050;
+    color: #FFFFFF;
+}
+
+.content table tbody tr:hover {
+    background: rgb(177, 176, 176);
+}
