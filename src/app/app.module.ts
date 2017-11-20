@@ -12,36 +12,38 @@ import { EmployeeService } from './employee.service';
 import { ErrorService } from './error.service';
 import { LoggingService } from './logging.service';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './in-memory-data.service';
-import {FormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import { InMemoryDataService } from './in-memory-data.service';
+import { FormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './/app-routing.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { RoutingModule } from './routing/routing.module';
 
 
 @NgModule({
+  imports: [
+    RoutingModule,
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    ),
+  ],
   declarations: [
     AppComponent,
     EmployeeIndexComponent,
     EmployeeAddComponent,
     EmployeeEditComponent,
     EmployeeDetailComponent,
-    EmployeeDeleteComponent
+    EmployeeDeleteComponent,
+    DashboardComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-
-    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-    // and returns simulated server responses.
-    // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    ),
-
-    AppRoutingModule
+  providers: [
+    EmployeeService,
+    ErrorService,
+    LoggingService
   ],
-  providers: [EmployeeService, ErrorService, LoggingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
