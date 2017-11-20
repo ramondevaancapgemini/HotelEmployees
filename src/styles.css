@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-body{
-    margin-top:70px;
-  }
+.content {
+    margin-top: 80px;
+}
+
+.content h2 {
+    text-align: center;
+}
