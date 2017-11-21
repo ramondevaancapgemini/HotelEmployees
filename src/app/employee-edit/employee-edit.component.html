@@ -3,12 +3,12 @@
 <div *ngIf="employee; else error">
   <div>
     <label>First name:
-      <input [(ngModel)]="employee.firstName" placeholder="First Name" value="employee.firstName"/>
+      <input [(ngModel)]="employee.firstName" placeholder="First Name"/>
     </label>
   </div>
   <div>
     <label>Last name:
-      <input [(ngModel)]="employee.lastName" placeholder="Last Name" value="employee.firstName"/>
+      <input [(ngModel)]="employee.lastName" placeholder="Last Name"/>
     </label>
   </div>
   <button (click)="save()">Save</button>

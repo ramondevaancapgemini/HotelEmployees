@@ -19,13 +19,15 @@ export class EmployeeEditComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.employeeService.getEmployee(+id).subscribe(employee => this.employee = employee);
+      this.employeeService.getEmployee(+id).subscribe(employee => {
+        this.employee = employee;
+      });
     }
   }
 
   save(): void {
-    this.employeeService.updateEmployee(this.employee)
-      .subscribe(() => this.location.back());
+    // this.employeeService.updateEmployee(this.employee)
+    //   .subscribe(() => this.location.back());
   }
 
 }

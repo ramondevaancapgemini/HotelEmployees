@@ -38,9 +38,9 @@ export class EmployeeIndexComponent implements OnInit {
   //      });
   //  }
 
-  delete(employee: Employee): void {
-    this.employees = this.employees.filter(h => h !== employee);
-    this.employeeService.deleteEmployee(employee).subscribe();
-  }
+  // delete(employee: Employee): void {
+  //   this.employees = this.employees.filter(h => h !== employee);
+  //   this.employeeService.deleteEmployee(employee).subscribe();
+  // }
 
 }
