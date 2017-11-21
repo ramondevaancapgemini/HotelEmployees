@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../Employee';
 import { EmployeeService } from '../employee.service';
+import * as _ from 'lodash';
 
 import { Subject } from 'rxjs';
 
@@ -17,6 +18,9 @@ export class EmployeeIndexComponent implements OnInit {
 
   constructor(private employeeService: EmployeeService) { }
 
+  currentPage: number = 10;
+  totalPages: number = 20;
+
   ngOnInit() {
     this.getEmployees();
   }
@@ -27,6 +31,12 @@ export class EmployeeIndexComponent implements OnInit {
         this.employees = userData.employees;
         this.dtTrigger.next();
       });
+  }
+
+  getPagination(): number[] {
+    let min = Math.max(1, this.currentPage - 2);
+    let max = Math.min(min + 4, this.totalPages);
+    return _.range(min, max + 1);
   }
 
   //  add(name: string): void {

@@ -20,8 +20,8 @@ export class EmployeeService {
   }
 
   /** GET employees from the server */
-  getEmployees(): Observable<UserData> {
-    return this.http.get<UserData>(this.employeesUrl + "?per_page=10")
+  getEmployees(page: number = 1): Observable<UserData> {
+    return this.http.get<UserData>(this.employeesUrl + "?per_page=10" + "&page=" + page)
       .pipe(
         tap(employees => this.log(`fetched employees`)),
         catchError(this.handleError('getEmployees', [])),
