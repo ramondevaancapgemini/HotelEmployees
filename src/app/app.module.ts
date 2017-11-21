@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 
 import { DataTablesModule } from 'angular-datatables';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -20,6 +20,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RoutingModule } from './routing/routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AlertComponent } from './alert/alert.component';
+import { AlertService } from './alert.service';
 
 
 @NgModule({
@@ -29,9 +31,6 @@ import { NavbarComponent } from './navbar/navbar.component';
     FormsModule,
     HttpClientModule,
     AngularFontAwesomeModule,
-    // HttpClientInMemoryWebApiModule.forRoot(
-    //   InMemoryDataService, { dataEncapsulation: false }
-    // ),
     DataTablesModule,
   ],
   declarations: [
@@ -42,12 +41,15 @@ import { NavbarComponent } from './navbar/navbar.component';
     EmployeeDetailComponent,
     EmployeeDeleteComponent,
     DashboardComponent,
-    NavbarComponent
+    NavbarComponent,
+    AlertComponent
   ],
   providers: [
-    EmployeeService,
+//    { provide: ErrorHandler, useClass: ErrorService },
+    AlertService,
     ErrorService,
-    LoggingService
+    EmployeeService,
+    LoggingService,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from '../alert.service';
+import { ErrorService } from '../error.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,8 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private alertService: AlertService) { }
 
+  success(message: string) {
+    this.alertService.success(message);
+  }
+
+  error(message: string) {
+    this.alertService.error(message);
+  }
+
+  info(message: string) {
+    this.alertService.info(message);
+  }
+
+  warn(message: string) {
+    this.alertService.warn(message);
+  }
+
+  clear() {
+    this.alertService.clear();
+  }
   ngOnInit() {
   }
 

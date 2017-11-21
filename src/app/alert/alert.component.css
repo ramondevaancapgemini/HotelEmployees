@@ -1,0 +1,8 @@
+.app-alert {
+    z-index: 5;
+    clear: both;
+}
+
+.error-component{
+    padding-top: 10px;
+}
