@@ -1,6 +1,7 @@
 <h2>Employee details</h2>
 
 <div *ngIf="employee; else error">
+  <h4>employee.firstName</h4>
   <div>
     <label>First name:
       <input [(ngModel)]="employee.firstName" placeholder="First Name"/>
