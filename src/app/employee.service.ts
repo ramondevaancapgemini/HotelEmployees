@@ -82,17 +82,24 @@ export class EmployeeService {
   //     catchError(this.handleError<Employee[]>('searchEmployees', []))
   //   );
   // }
-  //
-  // //////// Save methods //////////
-  //
-  // /** POST: add a new employee to the server */
-  // addEmployee(employee: Employee): Observable<Employee> {
-  //   return this.http.post<Employee>(this.employeesUrl, employee, httpOptions).pipe(
-  //     tap((employee: Employee) => this.log(`added employee w/ id=${employee.id}`)),
-  //     catchError(this.handleError<Employee>('addEmployee'))
-  //   );
-  // }
-  //
+
+  //////// Save methods //////////
+
+  /** POST: add a new employee to the server */
+  addEmployee(employee: Employee): Observable<Employee> {
+    return this.http.post(this.employeesUrl, employee, httpOptions).pipe(
+      tap(data => {
+        this.log(`added employee w/ id=${data['id']}`)
+      }),
+      catchError(ee => {
+        return this.handleError<Employee>('addEmployee')(ee);
+      }),
+      map(data => {
+        return new Employee(data['id'], data['firstName'], data['lastName'], data['avatar']);
+      })
+    );
+  }
+
   // /** DELETE: delete the employee from the server */
   // deleteEmployee(employee: Employee | number): Observable<Employee> {
   //   const id = typeof employee === 'number' ? employee : employee.id;
@@ -105,8 +112,8 @@ export class EmployeeService {
   // }
 
   /** PUT: update the employee on the server */
-  updateEmployee(id:number, employee: Employee): Observable<any> {
-    return this.http.put(`${this.employeesUrl}/${id}`, employee, httpOptions).pipe(
+  updateEmployee(employee: Employee): Observable<any> {
+    return this.http.put(`${this.employeesUrl}/${employee.id}`, employee, httpOptions).pipe(
       tap(_ => this.log(`updated employee id=${employee.id}`)),
       catchError(this.handleError<any>('updateEmployee'))
     );

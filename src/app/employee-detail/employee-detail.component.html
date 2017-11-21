@@ -1,19 +1,20 @@
-<h1>Employee details</h1>
+<h1>Employee Details</h1>
 
-<div *ngIf="employee; else error">
-  <div>
-    <label>First name:
-      <input [(ngModel)]="employee.firstName" placeholder="First Name" disabled/>
-    </label>
+<form #employeeForm="ngForm">
+  <div class="form-group">
+    <label for="firstName">First name</label>
+    <input type="text" class="form-control" id="firstName" disabled [(ngModel)]="model.firstName" name="firstName" #firstName="ngModel">
   </div>
-  <div>
-    <label>Last name:
-      <input [(ngModel)]="employee.lastName" placeholder="Last Name" disabled/>
-    </label>
-  </div>
-  <button (click)="goBack()">Back</button>
-</div>
 
-<ng-template #error>
-  No such employee
-</ng-template>
+  <div class="form-group">
+    <label for="lastName">Last name</label>
+    <input type="text" class="form-control" id="lastName" disabled [(ngModel)]="model.lastName" name="lastName" #lastName="ngModel">
+  </div>
+
+  <div class="form-group">
+    <label for="avatar">Avatar</label>
+    <input type="text" class="form-control" id="avatar" disabled [(ngModel)]="model.avatar" name="avatar">
+  </div>
+
+  <button type="button" class="btn btn-default" (click)="goBack()">Back</button>
+</form>

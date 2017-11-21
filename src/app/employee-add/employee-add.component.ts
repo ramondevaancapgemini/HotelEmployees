@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {Employee} from "../Employee";
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
+import { Employee } from '../Employee';
+import { EmployeeService } from '../employee.service';
 
 @Component({
   selector: 'app-employee-add',
@@ -9,7 +13,7 @@ import {Employee} from "../Employee";
 export class EmployeeAddComponent implements OnInit {
   model : Employee;
 
-  constructor() {
+  constructor(private employeeService: EmployeeService, private location: Location) {
     this.newEmployee();
   }
 
@@ -17,7 +21,12 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   onSubmit() {
-    //TODO: Add to server
+    this.employeeService.addEmployee(this.model)
+      .subscribe(() => this.location.back());
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
   newEmployee() {

@@ -11,10 +11,11 @@ import { EmployeeService } from '../employee.service';
   styleUrls: ['./employee-detail.component.css']
 })
 export class EmployeeDetailComponent implements OnInit {
+  model : Employee;
 
-  @Input() employee: Employee;
-
-  constructor(private employeeService: EmployeeService, private route: ActivatedRoute, private location: Location) { }
+  constructor(private employeeService: EmployeeService, private route: ActivatedRoute, private location: Location) {
+    this.model = new Employee(-1, '', '');
+  }
 
   ngOnInit() {
     this.getEmployee();
@@ -23,7 +24,7 @@ export class EmployeeDetailComponent implements OnInit {
   private getEmployee() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.employeeService.getEmployee(+id).subscribe(employee => {
-      this.employee = employee;
+      this.model = employee;
     });
   }
 

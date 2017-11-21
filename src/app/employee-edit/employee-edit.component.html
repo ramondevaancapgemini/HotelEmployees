@@ -1,21 +1,28 @@
-<h1>Employee details</h1>
+<h1>Employee Form</h1>
 
-<div *ngIf="employee; else error">
-  <h4>employee.firstName</h4>
-  <div>
-    <label>First name:
-      <input [(ngModel)]="employee.firstName" placeholder="First Name"/>
-    </label>
+<form (ngSubmit)="onSubmit()" #employeeForm="ngForm">
+  <div class="form-group">
+    <label for="firstName">First name</label>
+    <input type="text" class="form-control" id="firstName" required [(ngModel)]="model.firstName" name="firstName" #firstName="ngModel">
+    <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">
+      First name is required
+    </div>
   </div>
-  <div>
-    <label>Last name:
-      <input [(ngModel)]="employee.lastName" placeholder="Last Name"/>
-    </label>
-  </div>
-  <button (click)="save()">Save</button>
-  <button (click)="goBack()">Back</button>
-</div>
 
-<ng-template #error>
-  No such employee
-</ng-template>
+  <div class="form-group">
+    <label for="lastName">Last name</label>
+    <input type="text" class="form-control" id="lastName" required [(ngModel)]="model.lastName" name="lastName" #lastName="ngModel">
+    <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">
+      Last name is required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="avatar">Avatar</label>
+    <input type="text" class="form-control" id="avatar" [(ngModel)]="model.avatar" name="avatar">
+  </div>
+
+  <button type="submit" class="btn btn-success" [disabled]="!employeeForm.form.valid || equals()">Submit</button>
+  <button type="button" class="btn btn-default" (click)="resetEmployee(); employeeForm.reset(original);">Reset</button>
+  <button type="button" class="btn btn-default" (click)="goBack()">Back</button>
+</form>
