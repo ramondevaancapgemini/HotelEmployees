@@ -16,9 +16,12 @@
       <td>{{ employee.firstName }}</td>
       <td>{{ employee.lastName }}</td>
       <td>
-        <button class="edit" title="edit hero" routerLink="/edit/{{employee.id}}">Edit</button></td>
+          <a class="btn btn-primary" routerLink="/edit/{{employee.id}}">
+            <i class="fa fa-pencil-square-o"></i></a>
+        </td>
       <td>
-        <button class="delete" title="delete hero" routerLink="/delete/{{employee.id}}">Delete</button>
+        <a class="btn btn-danger" routerLink="/delete/{{employee.id}}">
+          <i class="fa fa-trash-o fa-lg"></i></a>
       </td>
     </tr>
   </tbody>
