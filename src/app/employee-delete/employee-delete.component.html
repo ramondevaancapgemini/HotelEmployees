@@ -1,3 +1,18 @@
-<p>
-  employee-delete works!
-</p>
+<h1>Delete Employee</h1>
+
+<div *ngIf="model">
+  <img *ngIf="model.avatar" class="img-fluid rounded mx-auto d-block" src="{{model.avatar}}" alt="No preview available.">
+  <table class="table table-responsive">
+    <tr>
+      <td><strong>First name:</strong></td>
+      <td class="text-left">{{model.firstName}}</td>
+    </tr>
+    <tr>
+      <td><strong>Last name:</strong></td>
+      <td class="text-left">{{model.lastName}}</td>
+    </tr>
+  </table>
+  <p>Are you sure you want to delete {{model.firstName}} {{model.lastName}}?</p>
+  <button type="button" class="btn btn-danger" (click)="delete()">Delete</button>
+  <button type="button" class="btn btn-default" (click)="goBack()">Back</button>
+</div>
