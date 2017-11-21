@@ -13,7 +13,7 @@ const httpOptions = {
 
 @Injectable()
 export class EmployeeService {
-  private employeesUrl = 'https://reqres.in/api/users';  // URL to web api
+  private employeesUrl = 'https://reqres.in/api/users?per_page=10';  // URL to web api
 
   constructor(
     private http: HttpClient,

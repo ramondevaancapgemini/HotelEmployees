@@ -6,6 +6,8 @@
       <th>ID</th>
       <th>First name</th>
       <th>Last name</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -13,6 +15,11 @@
       <td>{{ employee.id }}</td>
       <td>{{ employee.firstName }}</td>
       <td>{{ employee.lastName }}</td>
+      <td>
+        <button class="edit" title="edit hero" routerLink="/detail/{{employee.id}}">Edit</button></td>
+      <td>
+        <button class="delete" title="delete hero" routerLink="/delete/{{employee.id}}">Delete</button>
+      </td>
     </tr>
   </tbody>
 </table>
