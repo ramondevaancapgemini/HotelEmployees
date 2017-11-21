@@ -39,3 +39,11 @@
     white-space: nowrap;
     padding: 0.3rem 0.5rem 0.3rem 0.3rem;
 }
+
+.pagination {
+    float: right;
+}
+
+.pagination li:hover {
+    cursor: pointer;
+}

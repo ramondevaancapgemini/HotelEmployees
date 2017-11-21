@@ -1,7 +1,7 @@
 import { Employee } from "./Employee";
 
 export class UserData {
-    currentPage: Number;
-    totalPages: Number;
+    currentPage: number;
+    totalPages: number;
     employees: Employee[];
 }
