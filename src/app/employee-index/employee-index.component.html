@@ -1,4 +1,7 @@
-<h2>Employees</h2>
+<h1>Employees</h1>
+
+<a vertical-align="middle" class="btn btn-primary" routerLink="/add">
+  <i class="fa fa-plus" aria-hidden="true"></i>  <strong>Add</strong></a>
 
 <table class="table table-striped table-hover">
   <thead>
@@ -17,7 +20,7 @@
       <td>{{ employee.lastName }}</td>
       <td>
           <a class="btn btn-primary" routerLink="/edit/{{employee.id}}">
-            <i class="fa fa-pencil-square-o"></i></a>
+            <i class="fa fa-pencil-square-o fa-lg"></i></a>
         </td>
       <td>
         <a class="btn btn-danger" routerLink="/delete/{{employee.id}}">
