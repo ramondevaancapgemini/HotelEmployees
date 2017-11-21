@@ -18,19 +18,21 @@ export class EmployeeIndexComponent implements OnInit {
 
   constructor(private employeeService: EmployeeService) { }
 
-  currentPage: number;
+  currentPage: number = 1;
   totalPages: number;
-
+  pageLimit: number = 10;
+  
   ngOnInit() {
     this.getEmployees();
   }
 
-  getEmployees(page: number = 0): void {
-    this.employeeService.getEmployees(page)
+  getEmployees(page: number = this.currentPage, limit: number = this.pageLimit): void {
+    this.employeeService.getEmployees(page, limit)
       .subscribe(userData => {
         this.employees = userData.employees;
         this.currentPage = userData.currentPage;
         this.totalPages = userData.totalPages;
+        this.pageLimit = userData.pageLimit;
         this.dtTrigger.next();
       });
   }
@@ -43,6 +45,10 @@ export class EmployeeIndexComponent implements OnInit {
 
   loadPage(page: number) {
     this.getEmployees(page);
+  }
+
+  loadAmount(amount: number) {
+    this.getEmployees(1, amount);
   }
 
   //  add(name: string): void {

@@ -5,6 +5,17 @@
   <strong>Add</strong>
 </a>
 
+<div class="btn-group page-limit-selector">
+  <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {{pageLimit}}
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" (click)="loadAmount(5)">5</a>
+    <a class="dropdown-item" (click)="loadAmount(10)">10</a>
+    <a class="dropdown-item" (click)="loadAmount(25)">25</a>
+  </div>
+</div>
+
 <table class="table table-striped table-hover">
   <thead>
     <tr>

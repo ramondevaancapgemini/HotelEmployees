@@ -20,8 +20,8 @@ export class EmployeeService {
   }
 
   /** GET employees from the server */
-  getEmployees(page: number = 1): Observable<UserData> {
-    return this.http.get<UserData>(this.employeesUrl + "?per_page=10" + "&page=" + page)
+  getEmployees(page: number, limit: number): Observable<UserData> {
+    return this.http.get<UserData>(this.employeesUrl + "?page=" + page + "&per_page=" + limit)
       .pipe(
         tap(employees => this.log(`fetched employees`)),
         catchError(this.handleError('getEmployees', [])),
@@ -30,7 +30,7 @@ export class EmployeeService {
             new Employee(user.id, user.first_name, user.last_name, user.avatar)
           );
 
-          return {currentPage: body['page'], totalPages: body['total_pages'], employees: users};
+          return {currentPage: body['page'], totalPages: body['total_pages'], pageLimit: body['per_page'], employees: users};
         })
       );
 
