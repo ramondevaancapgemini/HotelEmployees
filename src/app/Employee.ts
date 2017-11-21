@@ -1,5 +1,8 @@
 export class Employee {
-  id: Number;
-  firstName: string;
-  lastName: string;
+  constructor(public id: Number,
+              public firstName: string,
+              public lastName: string,
+              public avatar?: string) {
+
+  }
 }

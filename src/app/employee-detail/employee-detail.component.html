@@ -1,3 +1,19 @@
-<p>
-  employee-detail works!
-</p>
+<h2>Employee details</h2>
+
+<div *ngIf="employee; else error">
+  <div>
+    <label>First name:
+      <input [(ngModel)]="employee.firstName" placeholder="First Name" disabled/>
+    </label>
+  </div>
+  <div>
+    <label>Last name:
+      <input [(ngModel)]="employee.lastName" placeholder="Last Name" disabled/>
+    </label>
+  </div>
+  <button (click)="goBack()">Back</button>
+</div>
+
+<ng-template #error>
+  No such employee
+</ng-template>

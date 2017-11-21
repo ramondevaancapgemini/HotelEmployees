@@ -5,10 +5,12 @@ import { EmployeeIndexComponent } from '../employee-index/employee-index.compone
 import { EmployeeDetailComponent } from '../employee-detail/employee-detail.component';
 import { EmployeeDeleteComponent } from '../employee-delete/employee-delete.component';
 import { EmployeeEditComponent } from '../employee-edit/employee-edit.component';
+import {EmployeeAddComponent} from "../employee-add/employee-add.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'add', component: EmployeeAddComponent },
   { path: 'detail/:id', component: EmployeeDetailComponent },
   { path: 'edit/:id', component: EmployeeEditComponent },
   { path: 'delete/:id', component: EmployeeDeleteComponent },

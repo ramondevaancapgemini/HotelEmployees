@@ -26,9 +26,9 @@ export class EmployeeService {
         tap(employees => this.log(`fetched employees`)),
         catchError(this.handleError('getEmployees', [])),
         map(body => {
-          let users = body['data'].map(user => {
-            return {id: user.id, firstName: user.first_name, lastName: user.last_name}
-          });
+          let users = body['data'].map(user =>
+            new Employee(user.id, user.first_name, user.last_name, user.avatar)
+          );
 
           return {currentPage: body['page'], totalPages: body['total_pages'], employees: users};
         })
@@ -60,13 +60,15 @@ export class EmployeeService {
   /** GET employee by id. Will 404 if id not found */
   getEmployee(id: number): Observable<Employee> {
     const url = `${this.employeesUrl}/${id}`;
-    let vis = this.http.get<Employee>(url).pipe(
+    return this.http.get<Employee>(url).pipe(
       tap(_ => this.log(`fetched employee id=${id}`)),
       catchError(this.handleError<Employee>(`getEmployee id=${id}`)),
-      map(body => body['data'])
-    );
+      map(body => {
+        let temp = body['data'];
 
-    return vis;
+        return new Employee(temp.id, temp.first_name, temp.last_name, temp.avatar);
+      })
+    );
   }
 
   // /* GET employees whose name contains search term */
@@ -101,14 +103,14 @@ export class EmployeeService {
   //     catchError(this.handleError<Employee>('deleteEmployee'))
   //   );
   // }
-  //
-  // /** PUT: update the employee on the server */
-  // updateEmployee(employee: Employee): Observable<any> {
-  //   return this.http.put(this.employeesUrl, employee, httpOptions).pipe(
-  //     tap(_ => this.log(`updated employee id=${employee.id}`)),
-  //     catchError(this.handleError<any>('updateEmployee'))
-  //   );
-  // }
+
+  /** PUT: update the employee on the server */
+  updateEmployee(id:number, employee: Employee): Observable<any> {
+    return this.http.put(`${this.employeesUrl}/${id}`, employee, httpOptions).pipe(
+      tap(_ => this.log(`updated employee id=${employee.id}`)),
+      catchError(this.handleError<any>('updateEmployee'))
+    );
+  }
 
   /**
    * Handle Http operation that failed.
