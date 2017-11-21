@@ -9,8 +9,6 @@ import {Employee} from "../Employee";
 export class EmployeeAddComponent implements OnInit {
   model : Employee;
 
-  submitted = false;
-
   constructor() {
     this.newEmployee();
   }
@@ -18,7 +16,9 @@ export class EmployeeAddComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit() { this.submitted = true; }
+  onSubmit() {
+    //TODO: Add to server
+  }
 
   newEmployee() {
     this.model = new Employee(-1, '', '');
