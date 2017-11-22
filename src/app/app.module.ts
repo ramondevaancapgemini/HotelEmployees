@@ -12,8 +12,8 @@ import { EmployeeDeleteComponent } from './employee-delete/employee-delete.compo
 import { EmployeeService } from './service/employee.service';
 import { ErrorService } from './service/error.service';
 import { LoggingService } from './service/logging.service';
-import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RoutingModule } from './routing/routing.module';
 import { NavbarComponent } from './navbar/navbar.component';

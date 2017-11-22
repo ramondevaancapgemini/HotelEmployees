@@ -5,7 +5,7 @@ export class LoggingService {
 
   constructor() { }
 
-  add(message : string) {
+  add(message: string) {
     console.log(message);
   }
 }

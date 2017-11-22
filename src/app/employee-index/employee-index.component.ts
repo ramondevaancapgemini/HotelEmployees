@@ -15,8 +15,8 @@ export class EmployeeIndexComponent implements OnInit {
   constructor(private employeeService: EmployeeService) { }
 
   totalPages: number;
-  pageLimit: number = 10;
-  currentPage: number = 1;
+  pageLimit = 10;
+  currentPage = 1;
 
   filter: string;
 
@@ -37,8 +37,8 @@ export class EmployeeIndexComponent implements OnInit {
 
   matchesFilter(employee: Employee) {
     if (this.filter) {
-      let args = this.filter.split(' ');
-      for (let arg of args) {
+      const args = this.filter.split(' ');
+      for (const arg of args) {
         if (!this.matchesEmployee(arg, employee)) {
           return false;
         }
@@ -48,13 +48,13 @@ export class EmployeeIndexComponent implements OnInit {
   }
 
   matchesEmployee(searchString: string, employee: Employee) {
-    return (employee.firstName.toLowerCase().indexOf(searchString.toLowerCase()) != -1
-      || employee.lastName.toLowerCase().indexOf(searchString.toLowerCase()) != -1);
+    return (employee.firstName.toLowerCase().indexOf(searchString.toLowerCase()) !== -1
+      || employee.lastName.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
   }
 
   getPagination(): number[] {
-    let min = Math.max(1, this.currentPage - 2);
-    let max = Math.min(min + 4, this.totalPages);
+    const min = Math.max(1, this.currentPage - 2);
+    const max = Math.min(min + 4, this.totalPages);
     return _.range(min, max + 1);
   }
 
