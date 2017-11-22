@@ -7,8 +7,7 @@
     <fieldset [disabled]="updating">
       <div class="form-group">
         <label for="firstName">First name</label>
-        <input type="text" class="form-control" id="firstName" required [(ngModel)]="model.firstName" name="firstName"
-               #firstName="ngModel">
+        <input type="text" class="form-control" id="firstName" required [(ngModel)]="model.firstName" name="firstName" #firstName="ngModel">
         <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">
           First name is required
         </div>
@@ -16,8 +15,7 @@
 
       <div class="form-group">
         <label for="lastName">Last name</label>
-        <input type="text" class="form-control" id="lastName" required [(ngModel)]="model.lastName" name="lastName"
-               #lastName="ngModel">
+        <input type="text" class="form-control" id="lastName" required [(ngModel)]="model.lastName" name="lastName" #lastName="ngModel">
         <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">
           Last name is required
         </div>
@@ -35,10 +33,9 @@
 
     <button type="submit" class="btn btn-success" [disabled]="!employeeForm.form.valid || equals() || updating">Submit
     </button>
-    <button type="button" class="btn btn-default" [disabled]="updating"
-            (click)="resetEmployee(); employeeForm.reset(original);">Reset
+    <button type="button" class="btn btn-secondary" [disabled]="updating" (click)="resetEmployee(); employeeForm.reset(original);">Reset
     </button>
-    <button type="button" class="btn btn-default" (click)="goBack()">Back</button>
+    <button type="button" class="btn btn-secondary" (click)="goBack()">Back</button>
   </form>
 </ng-template>
 

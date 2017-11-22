@@ -1,0 +1,10 @@
+td:nth-last-child(-n+2) {
+    text-align: right;
+    width: 1%;
+    white-space: nowrap;
+    padding: 0.3rem;
+}
+
+td:nth-last-child(-n+1) {
+    padding: 0.3rem 0.5rem 0.3rem 0.3rem;
+}

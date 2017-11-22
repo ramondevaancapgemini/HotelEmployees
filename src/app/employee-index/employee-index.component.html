@@ -26,8 +26,8 @@
       <th></th>
     </tr>
   </thead>
-  <tbody>
-    <tr *ngFor="let employee of employees">
+  <tbody *ngIf="employees">
+    <tr *ngFor="let employee of employees" routerLink="/detail/{{employee.id}}">
       <td>{{ employee.id }}</td>
       <td>{{ employee.firstName }}</td>
       <td>{{ employee.lastName }}</td>
@@ -45,8 +45,13 @@
   </tbody>
 </table>
 
+<div *ngIf="!employees" class="text-center">
+  <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+  <span class="sr-only">Loading...</span>
+</div>
+
 <nav aria-label="Page navigation">
-  <ul class="pagination">
+  <ul class="pagination disabled">
     <li class="page-item" [class.disabled]="currentPage <= 1">
       <a class="page-link" (click)="loadPage(currentPage - 1)">Previous</a>
     </li>

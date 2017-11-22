@@ -4,22 +4,22 @@
 
 <ng-template #content>
   <img *ngIf="model.avatar" class="img-fluid rounded mx-auto d-block" src="{{model.avatar}}" alt="No preview available.">
-  <table class="table table-responsive">
-    <tr>
-      <td><strong>First name:</strong></td>
-      <td class="text-left">{{model.firstName}}</td>
-    </tr>
-    <tr>
-      <td><strong>Last name:</strong></td>
-      <td class="text-left">{{model.lastName}}</td>
-    </tr>
-  </table>
+  <div class="details">
+    <p>
+      <strong>First name:</strong>
+      {{model.firstName}}
+      <br>
+      <strong>Last name:</strong>
+      {{model.lastName}}
+    </p>
+  </div>
   <a class="btn btn-primary" routerLink="/edit/{{model.id}}">
-    <i class="fa fa-pencil-square-o fa-lg"></i>
+    <i class="fa fa-pencil-square-o fa-lg"></i> Edit
   </a>
   <a class="btn btn-danger" routerLink="/delete/{{model.id}}">
-    <i class="fa fa-trash-o fa-lg"></i>
+    <i class="fa fa-trash-o fa-lg"></i> Delete
   </a>
+  <button type="button" class="btn btn-secondary" (click)="goBack()">Back</button>
 </ng-template>
 
 <ng-template #loading>

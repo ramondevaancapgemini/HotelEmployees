@@ -31,6 +31,6 @@
   </fieldset>
 
   <button type="submit" class="btn btn-success" [disabled]="!employeeForm.form.valid || adding">Submit</button>
-  <button type="button" class="btn btn-default" [disabled]="adding" (click)="newEmployee(); employeeForm.reset()">Clear</button>
-  <button type="button" class="btn btn-default" (click)="goBack()">Back</button>
+  <button type="button" class="btn btn-secondary" [disabled]="adding" (click)="newEmployee(); employeeForm.reset()">Clear</button>
+  <button type="button" class="btn btn-secondary" (click)="goBack()">Back</button>
 </form>
