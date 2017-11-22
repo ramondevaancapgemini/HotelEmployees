@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../service/alert.service';
-import { ErrorService } from '../service/error.service';
 
 @Component({
   selector: 'app-dashboard',

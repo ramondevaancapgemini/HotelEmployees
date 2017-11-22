@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {EmployeeAddComponent} from '../employee-add/employee-add.component';
 import {EmployeeService} from "../service/employee.service";
@@ -19,6 +19,7 @@ import {AlertComponent} from "../alert/alert.component";
 import {AlertService} from "../service/alert.service";
 import {ErrorService} from "../service/error.service";
 import {APP_BASE_HREF} from '@angular/common';
+import {ErrorHandler} from "@angular/core";
 
 describe('EmployeeEditComponent', () => {
   let component: EmployeeEditComponent;
@@ -45,15 +46,14 @@ describe('EmployeeEditComponent', () => {
         AlertComponent
       ],
       providers: [
-//    { provide: ErrorHandler, useClass: ErrorService },
+        {provide: ErrorHandler, useClass: ErrorService},
         {provide: APP_BASE_HREF, useValue: '/'},
         AlertService,
-        ErrorService,
         EmployeeService,
         LoggingService,
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

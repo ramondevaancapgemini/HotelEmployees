@@ -41,9 +41,8 @@ import { AlertService } from './service/alert.service';
     AlertComponent
   ],
   providers: [
-//    { provide: ErrorHandler, useClass: ErrorService },
+   { provide: ErrorHandler, useClass: ErrorService },
     AlertService,
-    ErrorService,
     EmployeeService,
     LoggingService,
   ],

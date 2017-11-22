@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
 import {EmployeeAddComponent} from '../employee-add/employee-add.component';
 import {EmployeeService} from "./employee.service";
@@ -19,6 +19,7 @@ import {AlertComponent} from "../alert/alert.component";
 import {AlertService} from "../service/alert.service";
 import {ErrorService} from "../service/error.service";
 import {APP_BASE_HREF} from '@angular/common';
+import {ErrorHandler} from "@angular/core";
 
 describe('EmployeeService', () => {
   beforeEach(() => {
@@ -26,12 +27,10 @@ describe('EmployeeService', () => {
       imports: [
         HttpClientModule,
       ],
-      declarations: [
-      ],
+      declarations: [],
       providers: [
-//    { provide: ErrorHandler, useClass: ErrorService },
+        {provide: ErrorHandler, useClass: ErrorService},
         AlertService,
-        ErrorService,
         EmployeeService,
         LoggingService,
       ]
