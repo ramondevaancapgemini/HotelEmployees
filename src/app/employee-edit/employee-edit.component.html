@@ -1,11 +1,17 @@
 <h1>Employee Form</h1>
 
-<div *ngIf="loading; else contentContainer" class="container text-center">
+<ng-container *ngIf="loading; else contentContainer">
+  <div class="container text-center">
   <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
   <span class="sr-only">Loading...</span>
 </div>
+</ng-container>
 
-<ng-template #contentContainer *ngIf="model;then modelContainer else errorContainer"></ng-template>
+<ng-template #contentContainer>
+  <ng-container *ngIf="model;then modelContainer else errorContainer">
+    
+  </ng-container>
+</ng-template>
 
 <ng-template #modelContainer>
   <form (ngSubmit)="onSubmit()" #employeeForm="ngForm">
