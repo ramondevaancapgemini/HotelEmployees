@@ -1,5 +1,5 @@
 <div class="error-component">
-    <div *ngFor="let alert of alerts" class="{{ cssClass(alert) }} alert-dismissable app-alert" (click)="removeAlert(alert)">
+    <div *ngFor="let alert of alerts" class="{{ cssClass(alert) }} alert-dismissable app-alert" (click)="removeAlert(alert)" timeout="1000">
         {{alert.message}}
         <a class="close">&times;</a>
     </div>
