@@ -27,7 +27,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let employee of employees">
+    <tr *ngFor="let employee of employees" routerLink="/detail/{{employee.id}}">
       <td>{{ employee.id }}</td>
       <td>{{ employee.firstName }}</td>
       <td>{{ employee.lastName }}</td>

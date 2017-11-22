@@ -14,8 +14,9 @@
     </p>
   </div>
   <p>Are you sure you want to delete {{model.firstName}} {{model.lastName}}?</p>
-  <button type="button" class="btn btn-danger" [disabled]="deleting" (click)="delete()">Delete</button>
-  <button type="button" class="btn btn-default" (click)="goBack()">Back</button>
+  <button type="button" class="btn btn-danger" [disabled]="deleting" (click)="delete()">
+    <i class="fa fa-trash-o fa-lg"></i> Delete</button>
+  <button type="button" class="btn btn-secondary" (click)="goBack()">Back</button>
 </ng-template>
 
 <ng-template #loading>
