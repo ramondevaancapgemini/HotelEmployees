@@ -1,9 +1,9 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Location} from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {Employee} from '../model/Employee';
 import {EmployeeService} from '../service/employee.service';
+import {AlertService} from '../service/alert.service';
 
 @Component({
   selector: 'app-employee-delete',
@@ -13,9 +13,14 @@ import {EmployeeService} from '../service/employee.service';
 export class EmployeeDeleteComponent implements OnInit {
   model: Employee;
   deleting: boolean;
+  loading: boolean;
 
-  constructor(private employeeService: EmployeeService, private route: ActivatedRoute, private location: Location) {
+  constructor(private employeeService: EmployeeService,
+              private alertService: AlertService,
+              private route: ActivatedRoute,
+              private router: Router) {
     this.deleting = false;
+    this.loading = false;
   }
 
   ngOnInit() {
@@ -23,22 +28,31 @@ export class EmployeeDeleteComponent implements OnInit {
   }
 
   private getEmployee() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.employeeService.getEmployee(+id).subscribe(employee => {
-      this.model = employee;
-    });
-  }
-
-  delete(): void {
-    this.deleting = true;
-    this.employeeService.deleteEmployee(this.model)
-      .subscribe(() => {
-        this.deleting = false;
-        this.location.back();
+    this.loading = true;
+    const id = this.route.snapshot.paramMap.get('id');
+    this.employeeService.getEmployee(+id).subscribe(
+      employee => {
+        this.model = employee;
+        this.loading = false;
+      },
+      ignored => {
+        this.alertService.error('Error loading employee');
+        this.loading = false;
       });
   }
 
-  goBack(): void {
-    this.location.back();
+  doDelete(): void {
+    this.deleting = true;
+    this.employeeService.deleteEmployee(this.model)
+      .subscribe(
+        ignored => {
+          this.alertService.success('User deleted');
+          this.router.navigate(['/employees']);
+          this.deleting = false;
+        },
+        ignored => {
+          this.alertService.error('Error deleting employee');
+          this.deleting = false;
+        });
   }
 }

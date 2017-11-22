@@ -1,6 +1,6 @@
 <h1>Employee Form</h1>
 
-<form (ngSubmit)="onSubmit()" #employeeForm="ngForm">
+<form #employeeForm="ngForm">
   <fieldset [disabled]="adding">
     <div class="form-group">
       <label for="firstName">First name</label>
@@ -30,7 +30,7 @@
     </div>
   </fieldset>
 
-  <button type="submit" class="btn btn-success" [disabled]="!employeeForm.form.valid || adding">Submit</button>
+  <button type="submit" class="btn btn-success" (click)="onSubmit()" [disabled]="!employeeForm.form.valid || adding">Submit</button>
   <button type="button" class="btn btn-secondary" [disabled]="adding" (click)="newEmployee(); employeeForm.reset()">Clear</button>
-  <button type="button" class="btn btn-secondary" (click)="goBack()">Back</button>
+  <button type="button" class="btn btn-secondary" routerLink="/employees">Back</button>
 </form>

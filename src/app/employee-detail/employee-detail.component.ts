@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Employee } from '../model/Employee';
@@ -12,9 +12,12 @@ import { AlertService } from '../service/alert.service';
 })
 export class EmployeeDetailComponent implements OnInit {
   model: Employee;
+  loading: boolean;
 
-  constructor(private employeeService: EmployeeService, private alertService: AlertService, private route: ActivatedRoute) {
-    // this.model = new Employee(-1, '', '');
+  constructor(private employeeService: EmployeeService,
+              private alertService: AlertService,
+              private route: ActivatedRoute) {
+    this.loading = false;
   }
 
   ngOnInit() {
@@ -22,13 +25,16 @@ export class EmployeeDetailComponent implements OnInit {
   }
 
   private getEmployee() {
+    this.loading = true;
     const id = this.route.snapshot.paramMap.get('id');
     this.employeeService.getEmployee(+id).subscribe(
       employee => {
         this.model = employee;
+        this.loading = false;
       },
-      error => {
-        this.alertService.error("Couldn't load this user");
+      ignored => {
+        this.alertService.error('Error loading employee');
+        this.loading = false;
       });
   }
 }

@@ -2,23 +2,24 @@
 
 <ng-container *ngIf="loading; else contentContainer">
   <div class="container text-center">
-  <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
-  <span class="sr-only">Loading...</span>
-</div>
+    <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+    <span class="sr-only">Loading...</span>
+  </div>
 </ng-container>
 
 <ng-template #contentContainer>
   <ng-container *ngIf="model;then modelContainer else errorContainer">
-    
+
   </ng-container>
 </ng-template>
 
 <ng-template #modelContainer>
-  <form (ngSubmit)="onSubmit()" #employeeForm="ngForm">
+  <form #employeeForm="ngForm">
     <fieldset [disabled]="updating">
       <div class="form-group">
         <label for="firstName">First name</label>
-        <input type="text" class="form-control" id="firstName" required [(ngModel)]="model.firstName" name="firstName" #firstName="ngModel">
+        <input type="text" class="form-control" id="firstName" required [(ngModel)]="model.firstName" name="firstName"
+               #firstName="ngModel">
         <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">
           First name is required
         </div>
@@ -26,7 +27,8 @@
 
       <div class="form-group">
         <label for="lastName">Last name</label>
-        <input type="text" class="form-control" id="lastName" required [(ngModel)]="model.lastName" name="lastName" #lastName="ngModel">
+        <input type="text" class="form-control" id="lastName" required [(ngModel)]="model.lastName" name="lastName"
+               #lastName="ngModel">
         <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">
           Last name is required
         </div>
@@ -42,16 +44,17 @@
       </div>
     </fieldset>
 
-    <button type="submit" class="btn btn-success" [disabled]="!employeeForm.form.valid || equals() || updating">Submit
+    <button type="button" class="btn btn-success" (click)="onSubmit()" [disabled]="!employeeForm.form.valid || equals() || updating">Submit
     </button>
-    <button type="button" class="btn btn-secondary" [disabled]="updating" (click)="resetEmployee(); employeeForm.reset(original);">Reset
+    <button type="button" class="btn btn-secondary" [disabled]="updating"
+            (click)="resetEmployee(); employeeForm.reset(original);">Reset
     </button>
-    <button type="button" class="btn btn-secondary" (click)="goBack()">Back</button>
+    <button type="button" class="btn btn-secondary" routerLink="/employees">Back</button>
   </form>
 </ng-template>
 
 <ng-template #errorContainer>
   <div class="error-message">
-    <h3>No user</h3>
+    <h3>No employee</h3>
   </div>
 </ng-template>
