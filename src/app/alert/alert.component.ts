@@ -34,7 +34,6 @@ export class AlertComponent {
             return;
         }
 
-        // return css class based on alert type
         switch (alert.type) {
             case AlertType.Success:
                 return 'alert alert-success';
