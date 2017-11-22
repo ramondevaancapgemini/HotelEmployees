@@ -23,6 +23,7 @@ export class EmployeeIndexComponent implements OnInit {
   }
 
   getEmployees(page: number = this.currentPage, limit: number = this.pageLimit): void {
+    this.employees = undefined;
     this.employeeService.getEmployees(page, limit)
       .subscribe(userData => {
         this.employees = userData.employees;
