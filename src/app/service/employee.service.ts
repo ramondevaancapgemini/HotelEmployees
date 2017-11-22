@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoggingService } from "./logging.service";
-import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs/Observable';
 import { Employee } from "../model/Employee";
 import { catchError, map, tap } from "rxjs/operators";
 import { of } from "rxjs/observable/of";
 import { UserData } from '../model/UserData';
+import { timeout } from 'rxjs/operator/timeout';
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/catch'
+import 'rxjs/add/observable/throw';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -52,15 +56,13 @@ export class EmployeeService {
   /** GET employee by id. Will 404 if id not found */
   getEmployee(id: number): Observable<Employee> {
     const url = `${this.employeesUrl}/${id}`;
-    return this.http.get<Employee>(url).pipe(
-      tap(_ => this.log(`fetched employee id=${id}`)),
-      catchError(this.handleError<Employee>(`getEmployee id=${id}`)),
-      map(body => {
+    return this.http.get<Employee>(url)
+      .map(body => {
         let temp = body['data'];
 
         return new Employee(temp.id, temp.first_name, temp.last_name, temp.avatar);
       })
-    );
+      .catch(error => Observable.throw(error));
   }
 
   // /* GET employees whose name contains search term */

@@ -1,10 +1,11 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Location} from '@angular/common';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import * as _ from 'lodash';
 
-import {Employee} from '../model/Employee';
-import {EmployeeService} from '../service/employee.service';
+import { Employee } from '../model/Employee';
+import { EmployeeService } from '../service/employee.service';
+import { AlertService } from '../service/alert.service';
 
 @Component({
   selector: 'app-employee-edit',
@@ -14,22 +15,22 @@ import {EmployeeService} from '../service/employee.service';
 export class EmployeeEditComponent implements OnInit {
   original: Employee;
   model: Employee;
-  updating: boolean;
+  loading: boolean;
 
-  constructor(private employeeService: EmployeeService, private route: ActivatedRoute, private location: Location) {
-
-  }
+  constructor(private employeeService: EmployeeService, private alertService: AlertService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.getEmployee();
   }
 
   onSubmit() {
-    this.updating = true;
     this.employeeService.updateEmployee(this.model)
-      .subscribe(() => {
-        this.updating = false;
-        this.location.back();
+      .subscribe(
+      employee => {
+        this.alertService.success("Changes saved");
+      },
+      error => {
+        this.alertService.error("Error updating the user");
       });
   }
 
@@ -38,19 +39,21 @@ export class EmployeeEditComponent implements OnInit {
   }
 
   private getEmployee() {
+    this.loading = true;
     const id = +this.route.snapshot.paramMap.get('id');
-    this.employeeService.getEmployee(+id).subscribe(employee => {
-      this.original = employee;
-      this.model = _.cloneDeep<Employee>(employee);
-    });
-  }
-
-  goBack(): void {
-    this.location.back();
+    this.employeeService.getEmployee(+id).subscribe(
+      employee => {
+        this.original = employee;
+        this.model = _.cloneDeep<Employee>(employee);
+        this.loading = false;
+      },
+      error => {
+        this.alertService.error("Error loading the user");
+        this.loading = false;
+      });
   }
 
   equals(): boolean {
     return _.isEqual(this.model, this.original);
-    // return Employee.equals(this.model, this.original);
   }
 }

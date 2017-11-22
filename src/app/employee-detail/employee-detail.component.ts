@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 
 import { Employee } from '../model/Employee';
 import { EmployeeService } from '../service/employee.service';
+import { AlertService } from '../service/alert.service';
 
 @Component({
   selector: 'app-employee-detail',
@@ -11,9 +11,9 @@ import { EmployeeService } from '../service/employee.service';
   styleUrls: ['./employee-detail.component.css']
 })
 export class EmployeeDetailComponent implements OnInit {
-  model : Employee;
+  model: Employee;
 
-  constructor(private employeeService: EmployeeService, private route: ActivatedRoute, private location: Location) {
+  constructor(private employeeService: EmployeeService, private alertService: AlertService, private route: ActivatedRoute) {
     // this.model = new Employee(-1, '', '');
   }
 
@@ -23,13 +23,12 @@ export class EmployeeDetailComponent implements OnInit {
 
   private getEmployee() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.employeeService.getEmployee(+id).subscribe(employee => {
-      this.model = employee;
-    });
+    this.employeeService.getEmployee(+id).subscribe(
+      employee => {
+        this.model = employee;
+      },
+      error => {
+        this.alertService.error("Couldn't load this user");
+      });
   }
-
-  goBack(): void {
-    this.location.back();
-  }
-
 }

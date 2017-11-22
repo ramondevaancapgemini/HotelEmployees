@@ -50,3 +50,8 @@
 .btn {
     cursor: pointer;
 }
+
+.error-message {
+    text-align: center;
+    color: red;
+}

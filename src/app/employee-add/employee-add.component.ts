@@ -27,7 +27,8 @@ export class EmployeeAddComponent implements OnInit {
     this.employeeService.addEmployee(this.model)
       .subscribe(() => {
         this.adding = false;
-        this.location.back();
+        throw new Error("GAAAAAAYYYYYYYYYYYYY");
+        // this.location.back();
       });
   }
 

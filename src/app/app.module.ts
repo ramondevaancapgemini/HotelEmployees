@@ -41,10 +41,10 @@ import { AlertService } from './service/alert.service';
     AlertComponent
   ],
   providers: [
-   { provide: ErrorHandler, useClass: ErrorService },
     AlertService,
     EmployeeService,
     LoggingService,
+    { provide: ErrorHandler, useClass: ErrorService }
   ],
   bootstrap: [AppComponent]
 })
