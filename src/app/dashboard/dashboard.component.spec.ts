@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
+import {AlertService} from "../service/alert.service";
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -8,7 +9,8 @@ describe('DashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ]
+      declarations: [ DashboardComponent ],
+      providers: [ AlertService ]
     })
     .compileComponents();
   }));
