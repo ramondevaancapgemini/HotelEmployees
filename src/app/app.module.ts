@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 
-import { DataTablesModule } from 'angular-datatables';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { AppComponent } from './app.component';
@@ -29,7 +28,6 @@ import { AlertService } from './service/alert.service';
     FormsModule,
     HttpClientModule,
     AngularFontAwesomeModule,
-    DataTablesModule,
   ],
   declarations: [
     AppComponent,
