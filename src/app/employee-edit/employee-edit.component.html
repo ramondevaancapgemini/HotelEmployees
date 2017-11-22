@@ -5,7 +5,7 @@
   <span class="sr-only">Loading...</span>
 </div>
 
-<ng-container #contentContainer *ngIf="model;then modelContainer else errorContainer"></ng-container>
+<ng-template #contentContainer *ngIf="model;then modelContainer else errorContainer"></ng-template>
 
 <ng-template #modelContainer>
   <form (ngSubmit)="onSubmit()" #employeeForm="ngForm">
