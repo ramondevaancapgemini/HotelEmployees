@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import * as _ from 'lodash';
 
@@ -17,7 +17,7 @@ export class EmployeeEditComponent implements OnInit {
   model: Employee;
   loading: boolean;
 
-  constructor(private employeeService: EmployeeService, private alertService: AlertService, private route: ActivatedRoute) {}
+  constructor(private employeeService: EmployeeService, private alertService: AlertService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.getEmployee();
@@ -28,6 +28,7 @@ export class EmployeeEditComponent implements OnInit {
       .subscribe(
       employee => {
         this.alertService.success("Changes saved");
+        this.router.navigate(["/employees"]);
       },
       error => {
         this.alertService.error("Error updating the user");
