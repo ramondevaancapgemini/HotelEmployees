@@ -37,11 +37,19 @@ export class EmployeeIndexComponent implements OnInit {
 
   matchesFilter(employee: Employee) {
     if (this.filter) {
-      return (employee.firstName.toLowerCase().indexOf(this.filter.toLowerCase()) != -1
-        || employee.lastName.toLowerCase().indexOf(this.filter.toLowerCase()) != -1);
-    } else {
-      return true;
+      let args = this.filter.split(' ');
+      for (let arg of args) {
+        if (!this.matchesEmployee(arg, employee)) {
+          return false;
+        }
+      }
     }
+    return true;
+  }
+
+  matchesEmployee(searchString: string, employee: Employee) {
+    return (employee.firstName.toLowerCase().indexOf(searchString.toLowerCase()) != -1
+      || employee.lastName.toLowerCase().indexOf(searchString.toLowerCase()) != -1);
   }
 
   getPagination(): number[] {
