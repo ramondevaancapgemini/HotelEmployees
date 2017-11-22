@@ -8,9 +8,9 @@ export class ErrorService implements ErrorHandler {
 
   handleError(error: any): void {
     if (error.message) {
-      this.alertService.error(error.message, true);
+      this.alertService.error(error.message);
     } else {
-      this.alertService.error(error, true);
+      this.alertService.error(error);
     }
     throw error;
   }
