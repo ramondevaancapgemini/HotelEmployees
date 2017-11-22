@@ -25,9 +25,14 @@
     vertical-align: middle;
 }
 
-.page-limit-selector {
+.table-options-right {
     float: right;
     cursor: pointer;
+}
+
+.table-options-right input {
+    margin-right: 5px;
+    border-color: #007bff;
 }
 
 .btn-group>.btn {

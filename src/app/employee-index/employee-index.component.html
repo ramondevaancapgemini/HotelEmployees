@@ -5,7 +5,10 @@
   <strong>Add</strong>
 </a>
 
-<div class="btn-group page-limit-selector">
+<form class="form-inline table-options-right">
+
+  <input type="text" class="form-control filter-field" id="filter" [(ngModel)]="filter" name="filter" placeholder="Filter...">
+
   <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     {{pageLimit}}
   </button>
@@ -14,7 +17,7 @@
     <a class="dropdown-item" (click)="loadAmount(10)">10</a>
     <a class="dropdown-item" (click)="loadAmount(25)">25</a>
   </div>
-</div>
+</form>
 
 <table class="table table-striped table-hover">
   <thead>
@@ -27,21 +30,23 @@
     </tr>
   </thead>
   <tbody *ngIf="employees">
-    <tr *ngFor="let employee of employees" routerLink="/detail/{{employee.id}}">
-      <td>{{ employee.id }}</td>
-      <td>{{ employee.firstName }}</td>
-      <td>{{ employee.lastName }}</td>
-      <td>
-        <a class="btn btn-primary" routerLink="/edit/{{employee.id}}">
-          <i class="fa fa-pencil-square-o fa-lg"></i>
-        </a>
-      </td>
-      <td>
-        <a class="btn btn-danger" routerLink="/delete/{{employee.id}}">
-          <i class="fa fa-trash-o fa-lg"></i>
-        </a>
-      </td>
-    </tr>
+    <ng-container *ngFor="let employee of employees">
+      <tr *ngIf="matchesFilter(employee)" routerLink="/detail/{{employee.id}}">
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.firstName }}</td>
+        <td>{{ employee.lastName }}</td>
+        <td>
+          <a class="btn btn-primary" routerLink="/edit/{{employee.id}}">
+            <i class="fa fa-pencil-square-o fa-lg"></i>
+          </a>
+        </td>
+        <td>
+          <a class="btn btn-danger" routerLink="/delete/{{employee.id}}">
+            <i class="fa fa-trash-o fa-lg"></i>
+          </a>
+        </td>
+      </tr>
+    </ng-container>
   </tbody>
 </table>
 

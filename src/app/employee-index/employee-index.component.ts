@@ -18,6 +18,8 @@ export class EmployeeIndexComponent implements OnInit {
   pageLimit: number = 10;
   currentPage: number = 1;
 
+  filter: string;
+
   ngOnInit() {
     this.getEmployees();
   }
@@ -31,6 +33,15 @@ export class EmployeeIndexComponent implements OnInit {
         this.pageLimit = userData.pageLimit;
         this.currentPage = Math.max(Math.min(userData.totalPages, userData.currentPage), 1);
       });
+  }
+
+  matchesFilter(employee: Employee) {
+    if (this.filter) {
+      return (employee.firstName.toLowerCase().indexOf(this.filter.toLowerCase()) != -1
+        || employee.lastName.toLowerCase().indexOf(this.filter.toLowerCase()) != -1);
+    } else {
+      return true;
+    }
   }
 
   getPagination(): number[] {
