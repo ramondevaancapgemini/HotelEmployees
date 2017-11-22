@@ -1,14 +1,14 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {LoggingService} from "./logging.service";
-import {Observable} from "rxjs/Observable";
-import {Employee} from "./Employee";
-import {catchError, map, tap} from "rxjs/operators";
-import {of} from "rxjs/observable/of";
-import {UserData} from './UserData';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { LoggingService } from "./logging.service";
+import { Observable } from "rxjs/Observable";
+import { Employee } from "./Employee";
+import { catchError, map, tap } from "rxjs/operators";
+import { of } from "rxjs/observable/of";
+import { UserData } from './UserData';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable()
@@ -16,31 +16,23 @@ export class EmployeeService {
   private employeesUrl = 'https://reqres.in/api/users';  // URL to web api
 
   constructor(private http: HttpClient,
-              private loggingService: LoggingService) {
+    private loggingService: LoggingService) {
   }
 
   /** GET employees from the server */
   getEmployees(page: number, limit: number): Observable<UserData> {
     return this.http.get<UserData>(this.employeesUrl + "?page=" + page + "&per_page=" + limit)
       .pipe(
-        tap(employees => this.log(`fetched employees`)),
-        catchError(this.handleError('getEmployees', [])),
-        map(body => {
-          let users = body['data'].map(user =>
-            new Employee(user.id, user.first_name, user.last_name, user.avatar)
-          );
+      tap(employees => this.log(`fetched employees`)),
+      catchError(this.handleError('getEmployees', [])),
+      map(body => {
+        let users = body['data'].map(user =>
+          new Employee(user.id, user.first_name, user.last_name, user.avatar)
+        );
 
-          return {currentPage: body['page'], totalPages: body['total_pages'], pageLimit: body['per_page'], employees: users};
-        })
+        return { currentPage: body['page'], totalPages: body['total_pages'], pageLimit: body['per_page'], employees: users };
+      })
       );
-
-    // function extractData(body): UserData {
-    //   let users = body.data.map(user => {
-    //     return { id: user.id, firstName: user.first_name, lastName: user.last_name }
-    //   });
-    //
-    //   return { currentPage: body.page, totalPages: body.total_pages, employees: users };
-    // }
   }
 
   // /** GET employee by id. Return `undefined` when id not found */

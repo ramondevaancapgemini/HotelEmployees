@@ -42,6 +42,11 @@
 
 .page-limit-selector {
     float: right;
+    cursor: pointer;
+}
+
+.btn-group>.btn {
+    cursor: pointer;
 }
 
 .pagination {

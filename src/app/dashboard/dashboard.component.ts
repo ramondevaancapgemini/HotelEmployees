@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   }
 
   error(message: string) {
-    this.alertService.error(message);
+    this.alertService.error(message, true);
   }
 
   info(message: string) {
