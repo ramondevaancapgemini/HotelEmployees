@@ -22,7 +22,7 @@ export class EmployeeDetailComponent implements OnInit {
   }
 
   private getEmployee() {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
     this.employeeService.getEmployee(+id).subscribe(employee => {
       this.model = employee;
     });
