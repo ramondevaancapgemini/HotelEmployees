@@ -14,7 +14,7 @@ export class EmployeeDetailComponent implements OnInit {
   model : Employee;
 
   constructor(private employeeService: EmployeeService, private route: ActivatedRoute, private location: Location) {
-    this.model = new Employee(-1, '', '');
+    // this.model = new Employee(-1, '', '');
   }
 
   ngOnInit() {

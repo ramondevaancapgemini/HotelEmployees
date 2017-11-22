@@ -3,8 +3,6 @@ import { Employee } from '../model/Employee';
 import { EmployeeService } from '../service/employee.service';
 import * as _ from 'lodash';
 
-import { Subject } from 'rxjs';
-
 @Component({
   selector: 'app-employee-index',
   templateUrl: './employee-index.component.html',
@@ -19,7 +17,7 @@ export class EmployeeIndexComponent implements OnInit {
   totalPages: number;
   pageLimit: number = 10;
   currentPage: number = 1;
-  
+
   ngOnInit() {
     this.getEmployees();
   }
@@ -37,7 +35,7 @@ export class EmployeeIndexComponent implements OnInit {
   getPagination(): number[] {
     let min = Math.max(1, this.currentPage - 2);
     let max = Math.min(min + 4, this.totalPages);
-    return _.range(min, max + 1); 
+    return _.range(min, max + 1);
   }
 
   loadPage(page: number) {

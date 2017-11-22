@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import {Component, OnInit, Input} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
 
-import { Employee } from '../model/Employee';
-import { EmployeeService } from '../service/employee.service';
+import {Employee} from '../model/Employee';
+import {EmployeeService} from '../service/employee.service';
 
 @Component({
   selector: 'app-employee-delete',
@@ -11,10 +11,11 @@ import { EmployeeService } from '../service/employee.service';
   styleUrls: ['./employee-delete.component.css']
 })
 export class EmployeeDeleteComponent implements OnInit {
-  model : Employee;
+  model: Employee;
+  deleting: boolean;
 
   constructor(private employeeService: EmployeeService, private route: ActivatedRoute, private location: Location) {
-    // this.model = new Employee(-1, '', '');
+    this.deleting = false;
   }
 
   ngOnInit() {
@@ -24,13 +25,17 @@ export class EmployeeDeleteComponent implements OnInit {
   private getEmployee() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.employeeService.getEmployee(+id).subscribe(employee => {
-      // this.model = employee;
+      this.model = employee;
     });
   }
 
-  delete() : void {
+  delete(): void {
+    this.deleting = true;
     this.employeeService.deleteEmployee(this.model)
-      .subscribe(() => this.location.back());
+      .subscribe(() => {
+        this.deleting = false;
+        this.location.back();
+      });
   }
 
   goBack(): void {

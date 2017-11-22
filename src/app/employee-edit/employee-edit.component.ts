@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import {Component, OnInit, Input} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
 import * as _ from 'lodash';
 
-import { Employee } from '../model/Employee';
-import { EmployeeService } from '../service/employee.service';
+import {Employee} from '../model/Employee';
+import {EmployeeService} from '../service/employee.service';
 
 @Component({
   selector: 'app-employee-edit',
@@ -12,11 +12,12 @@ import { EmployeeService } from '../service/employee.service';
   styleUrls: ['./employee-edit.component.css']
 })
 export class EmployeeEditComponent implements OnInit {
-  original : Employee;
-  model : Employee;
+  original: Employee;
+  model: Employee;
+  updating: boolean;
 
   constructor(private employeeService: EmployeeService, private route: ActivatedRoute, private location: Location) {
-    this.model = new Employee(-1, '', '');
+
   }
 
   ngOnInit() {
@@ -24,8 +25,12 @@ export class EmployeeEditComponent implements OnInit {
   }
 
   onSubmit() {
+    this.updating = true;
     this.employeeService.updateEmployee(this.model)
-      .subscribe(() => this.location.back());
+      .subscribe(() => {
+        this.updating = false;
+        this.location.back();
+      });
   }
 
   resetEmployee() {

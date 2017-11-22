@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import {Component, OnInit, Input} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
 
-import { Employee } from '../model/Employee';
-import { EmployeeService } from '../service/employee.service';
+import {Employee} from '../model/Employee';
+import {EmployeeService} from '../service/employee.service';
 
 @Component({
   selector: 'app-employee-add',
@@ -11,18 +11,24 @@ import { EmployeeService } from '../service/employee.service';
   styleUrls: ['./employee-add.component.css']
 })
 export class EmployeeAddComponent implements OnInit {
-  model : Employee;
+  model: Employee;
+  adding: boolean;
 
   constructor(private employeeService: EmployeeService, private location: Location) {
     this.newEmployee();
+    this.adding = false;
   }
 
   ngOnInit() {
   }
 
   onSubmit() {
+    this.adding = true;
     this.employeeService.addEmployee(this.model)
-      .subscribe(() => this.location.back());
+      .subscribe(() => {
+        this.adding = false;
+        this.location.back();
+      });
   }
 
   goBack(): void {
@@ -32,13 +38,4 @@ export class EmployeeAddComponent implements OnInit {
   newEmployee() {
     this.model = new Employee(-1, '', '');
   }
-
-  // add(name: string): void {
-  //   name = name.trim();
-  //   if (!name) { return; }
-  //   this.heroService.addHero({ name } as Hero)
-  //     .subscribe(hero => {
-  //       this.heroes.push(hero);
-  //     });
-  // }
 }
