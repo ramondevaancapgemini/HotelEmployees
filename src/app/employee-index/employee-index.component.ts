@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from '../Employee';
-import { EmployeeService } from '../employee.service';
+import { Employee } from '../model/Employee';
+import { EmployeeService } from '../service/employee.service';
 import * as _ from 'lodash';
 
 import { Subject } from 'rxjs';
@@ -21,7 +21,7 @@ export class EmployeeIndexComponent implements OnInit {
   currentPage: number = 1;
   totalPages: number;
   pageLimit: number = 10;
-  
+
   ngOnInit() {
     this.getEmployees();
   }

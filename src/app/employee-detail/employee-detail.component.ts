@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Employee } from '../Employee';
-import { EmployeeService } from '../employee.service';
+import { Employee } from '../model/Employee';
+import { EmployeeService } from '../service/employee.service';
 
 @Component({
   selector: 'app-employee-detail',

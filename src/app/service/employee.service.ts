@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoggingService } from "./logging.service";
 import { Observable } from "rxjs/Observable";
-import { Employee } from "./Employee";
+import { Employee } from "../model/Employee";
 import { catchError, map, tap } from "rxjs/operators";
 import { of } from "rxjs/observable/of";
-import { UserData } from './UserData';
+import { UserData } from '../model/UserData';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

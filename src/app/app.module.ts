@@ -10,18 +10,16 @@ import { EmployeeAddComponent } from './employee-add/employee-add.component';
 import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
 import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
 import { EmployeeDeleteComponent } from './employee-delete/employee-delete.component';
-import { EmployeeService } from './employee.service';
-import { ErrorService } from './error.service';
-import { LoggingService } from './logging.service';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
+import { EmployeeService } from './service/employee.service';
+import { ErrorService } from './service/error.service';
+import { LoggingService } from './service/logging.service';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RoutingModule } from './routing/routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AlertComponent } from './alert/alert.component';
-import { AlertService } from './alert.service';
+import { AlertService } from './service/alert.service';
 
 
 @NgModule({
