@@ -33,7 +33,7 @@ export class EmployeeEditComponent implements OnInit {
     this.employeeService.updateEmployee(this.model)
       .subscribe(
       ignored => {
-        this.alertService.success('Changes saved');
+        this.alertService.success('Successfully saved changes for ' + this.model.firstName + ' ' + this.model.lastName);
         this.router.navigate(['/employees']);
         this.updating = false;
       },

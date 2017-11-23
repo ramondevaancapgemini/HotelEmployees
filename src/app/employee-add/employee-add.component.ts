@@ -31,7 +31,7 @@ export class EmployeeAddComponent implements OnInit {
     this.employeeService.addEmployee(this.model)
       .subscribe(
       ignored => {
-        this.alertService.success('Added employee');
+        this.alertService.success('Successfully added ' + this.model.firstName + ' ' + this.model.lastName);
         this.router.navigate(['/employees']);
         this.adding = false;
       },
