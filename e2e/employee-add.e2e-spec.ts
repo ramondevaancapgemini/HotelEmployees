@@ -22,7 +22,7 @@ describe('hotel-employees App', () => {
       let submitButton;
       beforeEach(() => {
         submitButton = page.getSubmitButton();
-      })
+      });
       it('should be disabled when the form is empty', () => {
         expect(submitButton.getAttribute('disabled')).toBeTruthy();
       });

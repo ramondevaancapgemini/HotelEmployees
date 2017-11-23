@@ -20,8 +20,8 @@ import { AlertService } from '../service/alert.service';
 import { ErrorService } from '../service/error.service';
 import { APP_BASE_HREF } from '@angular/common';
 import { ErrorHandler } from '@angular/core';
-import { Observable } from 'rxjs';
 import * as _ from 'lodash';
+import {Observable} from 'rxjs/Observable';
 
 describe('EmployeeDeleteComponent', () => {
   let component: EmployeeDeleteComponent;
@@ -70,7 +70,7 @@ describe('EmployeeDeleteComponent', () => {
 
   describe('when the page is loaded', () => {
     it('the employee should be retrieved from the database', () => {
-      const employee = { id: 1, firstName: "First", lastName: "Last" }
+      const employee = { id: 1, firstName: 'First', lastName: 'Last' };
       const spy = spyOn(employeeService, 'getEmployee').and.returnValue(Observable.of(employee));
       component.ngOnInit();
       expect(_.isEqual(component.model, employee)).toBeTruthy();
@@ -80,9 +80,9 @@ describe('EmployeeDeleteComponent', () => {
   describe('when the delete button is clicked', () => {
     it('the page should not be loading', () => {
       expect(component.deleting).toBeFalsy();
-    })
+    });
     it('it should delete an employee', fakeAsync(() => {
-      const spy = spyOn(employeeService, 'deleteEmployee').and.returnValue(Observable.of({ id: 1, firstName: "First", lastName: "Last" }));
+      const spy = spyOn(employeeService, 'deleteEmployee').and.returnValue(Observable.of({ id: 1, firstName: 'First', lastName: 'Last' }));
       component.doDelete();
       expect(spy.calls.any()).toEqual(true);
     }));

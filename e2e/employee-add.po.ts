@@ -25,6 +25,6 @@ export class EmployeeAdd {
   }
 
   getSubmitButton() {
-    return element(by.className('btn-success'));    
+    return element(by.className('btn-success'));
   }
 }

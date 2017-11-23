@@ -25,7 +25,7 @@ export class EmployeeDelete {
   }
 
   waitForContent() {
-    var loader = element(by.className("details"));
+    const loader = element(by.className('details'));
     browser.wait(protractor.ExpectedConditions.visibilityOf(loader), 5000, 'Element taking too long to appear in the DOM');
   }
 }

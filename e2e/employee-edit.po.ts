@@ -21,7 +21,7 @@ export class EmployeeEdit {
   }
 
   waitForContent() {
-    var loader = element(by.id("content"));
+    const loader = element(by.id('content'));
     browser.wait(protractor.ExpectedConditions.visibilityOf(loader), 5000, 'Element taking too long to appear in the DOM');
   }
 }

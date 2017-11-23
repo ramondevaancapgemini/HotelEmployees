@@ -19,7 +19,7 @@ describe('hotel-employees App', () => {
       expect(page.getFilterField()).toBeTruthy();
     });
     it('should have a page limit dropdown', () => {
-      let dropdown = page.getFilterField();
+      const dropdown = page.getFilterField();
       expect(dropdown).toBeTruthy();
       dropdown.click();
       expect(page.getPageLimitItems().count()).toBe(3);

@@ -52,7 +52,7 @@ export class EmployeeService {
         return new Employee(temp.id, temp.first_name, temp.last_name, temp.avatar);
       })
       .do((employee) => {
-        if(employee && employee.id) {
+        if (employee && employee.id) {
           this.loggingService.add(`fetched employee id=${employee.id}`);
         }
       });
@@ -67,7 +67,7 @@ export class EmployeeService {
         return new Employee(data['id'], data['firstName'], data['lastName'], data['avatar']);
       })
       .do((e) => {
-        if(e && e.id) {
+        if (e && e.id) {
           this.loggingService.add(`added employee w/ id=${e.id}`);
         }
       });
@@ -88,7 +88,7 @@ export class EmployeeService {
   updateEmployee(employee: Employee): Observable<Object> {
     return this.http.put(`${this.employeesUrl}/${employee.id}`, employee, httpOptions)
       .do(() => {
-        if(employee && employee.id) {
+        if (employee && employee.id) {
           this.loggingService.add(`updated employee id=${employee.id}`);
         }
       });

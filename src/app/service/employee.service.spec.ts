@@ -6,9 +6,9 @@ import {LoggingService} from './logging.service';
 import {AlertService} from './alert.service';
 import {ErrorService} from './error.service';
 import {ErrorHandler} from '@angular/core';
-import {Observable} from "rxjs/Observable";
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import {Employee} from "../model/Employee";
+import {Employee} from '../model/Employee';
 import * as _ from 'lodash';
 
 describe('EmployeeService', () => {
@@ -33,27 +33,27 @@ describe('EmployeeService', () => {
 
   describe('GetEmployees', () => {
     it('should run without errors', inject([HttpClient, LoggingService],
-      (httpClient: HttpClient, loggingService : LoggingService) => {
-      spyOn(httpClient, "get").and.returnValue(Observable.of());
+      (httpClient: HttpClient, loggingService: LoggingService) => {
+      spyOn(httpClient, 'get').and.returnValue(Observable.of());
 
-      const service : EmployeeService = new EmployeeService(httpClient, loggingService);
+      const service: EmployeeService = new EmployeeService(httpClient, loggingService);
 
       expect(service.getEmployees(0, 5)).toBeTruthy();
     }));
 
     it('should perform a get request', inject([HttpClient, LoggingService],
-      (httpClient: HttpClient, loggingService : LoggingService) => {
-      const spy = spyOn(httpClient, "get").and.returnValue(Observable.of());
+      (httpClient: HttpClient, loggingService: LoggingService) => {
+      const spy = spyOn(httpClient, 'get').and.returnValue(Observable.of());
 
-      const service : EmployeeService = new EmployeeService(httpClient, loggingService);
+      const service: EmployeeService = new EmployeeService(httpClient, loggingService);
       service.getEmployees(0, 5);
 
       expect(spy).toHaveBeenCalled();
     }));
 
     it('should return a single employee', inject([HttpClient, LoggingService],
-      (httpClient: HttpClient, loggingService : LoggingService) => {
-      const employee : Employee = new Employee(0, 'Testy', 'McTest');
+      (httpClient: HttpClient, loggingService: LoggingService) => {
+      const employee: Employee = new Employee(0, 'Testy', 'McTest');
       const userData = {
         currentPage: 0,
         pageLimit: 3,
@@ -66,8 +66,8 @@ describe('EmployeeService', () => {
         }]
       };
 
-      spyOn(httpClient, "get").and.returnValue(Observable.of(userData));
-      const service : EmployeeService = new EmployeeService(httpClient, loggingService);
+      spyOn(httpClient, 'get').and.returnValue(Observable.of(userData));
+      const service: EmployeeService = new EmployeeService(httpClient, loggingService);
 
       let num = 0;
       service.getEmployees(0, 5)
@@ -82,17 +82,17 @@ describe('EmployeeService', () => {
 
   describe('GetEmployee', () => {
     it('should run without errors', inject([HttpClient, LoggingService],
-      (httpClient: HttpClient, loggingService : LoggingService) => {
-      spyOn(httpClient, "get").and.returnValue(Observable.of());
+      (httpClient: HttpClient, loggingService: LoggingService) => {
+      spyOn(httpClient, 'get').and.returnValue(Observable.of());
 
-      const service : EmployeeService = new EmployeeService(httpClient, loggingService);
+      const service: EmployeeService = new EmployeeService(httpClient, loggingService);
 
       expect(service.getEmployee(0)).toBeTruthy();
     }));
 
     it('should return single employee', inject([HttpClient, LoggingService],
-      (httpClient: HttpClient, loggingService : LoggingService) => {
-      const employee : Employee = new Employee(0, 'Testy', 'McTest');
+      (httpClient: HttpClient, loggingService: LoggingService) => {
+      const employee: Employee = new Employee(0, 'Testy', 'McTest');
       const data = {
         data: {
           id: employee.id,
@@ -102,17 +102,17 @@ describe('EmployeeService', () => {
         }
       };
 
-      spyOn(httpClient, "get").and.returnValue(Observable.of(data));
+      spyOn(httpClient, 'get').and.returnValue(Observable.of(data));
 
-      const service : EmployeeService = new EmployeeService(httpClient, loggingService);
+      const service: EmployeeService = new EmployeeService(httpClient, loggingService);
 
-      let ret : Employee;
+      let ret: Employee;
 
       service.getEmployee(0).subscribe((e) => {
         ret = e;
       });
 
-      if(!ret) {
+      if (!ret) {
         expect(false).toBeTruthy();
       } else {
         expect(_.isEqual(ret, employee)).toBeTruthy();
@@ -120,9 +120,9 @@ describe('EmployeeService', () => {
     }));
 
     it('should error on non-existent employees', inject([HttpClient, LoggingService],
-      (httpClient: HttpClient, loggingService : LoggingService) => {
-      spyOn(httpClient, "get").and.returnValue(Observable.throw('Employee not found'));
-      const service : EmployeeService = new EmployeeService(httpClient, loggingService);
+      (httpClient: HttpClient, loggingService: LoggingService) => {
+      spyOn(httpClient, 'get').and.returnValue(Observable.throw('Employee not found'));
+      const service: EmployeeService = new EmployeeService(httpClient, loggingService);
 
       let error = false;
 
@@ -138,23 +138,23 @@ describe('EmployeeService', () => {
 
   describe('addEmployee', () => {
     it('should run without errors', inject([HttpClient, LoggingService],
-      (httpClient: HttpClient, loggingService : LoggingService) => {
-      const employee : Employee = new Employee(0, 'Testy', 'McTest');
-      spyOn(httpClient, "post").and.returnValue(Observable.of());
+      (httpClient: HttpClient, loggingService: LoggingService) => {
+      const employee: Employee = new Employee(0, 'Testy', 'McTest');
+      spyOn(httpClient, 'post').and.returnValue(Observable.of());
 
-      const service : EmployeeService = new EmployeeService(httpClient, loggingService);
+      const service: EmployeeService = new EmployeeService(httpClient, loggingService);
 
       expect(service.addEmployee(employee)).toBeTruthy();
     }));
 
     it('should return input employee', inject([HttpClient, LoggingService],
-      (httpClient: HttpClient, loggingService : LoggingService) => {
-      const employee : Employee = new Employee(1, 'Testy', 'McTest');
-      spyOn(httpClient, "post").and.returnValue(Observable.of(employee));
+      (httpClient: HttpClient, loggingService: LoggingService) => {
+      const employee: Employee = new Employee(1, 'Testy', 'McTest');
+      spyOn(httpClient, 'post').and.returnValue(Observable.of(employee));
 
-      const service : EmployeeService = new EmployeeService(httpClient, loggingService);
+      const service: EmployeeService = new EmployeeService(httpClient, loggingService);
 
-      let ret : Employee;
+      let ret: Employee;
 
       service.addEmployee(employee).subscribe((e) => {
         ret = e;
@@ -168,13 +168,13 @@ describe('EmployeeService', () => {
     }));
 
     it('should return error when add failed', inject([HttpClient, LoggingService],
-      (httpClient: HttpClient, loggingService : LoggingService) => {
-      const employee : Employee = new Employee(1, 'Testy', 'McTest');
-      spyOn(httpClient, "post").and.returnValue(Observable.throw('Could not add employee'));
+      (httpClient: HttpClient, loggingService: LoggingService) => {
+      const employee: Employee = new Employee(1, 'Testy', 'McTest');
+      spyOn(httpClient, 'post').and.returnValue(Observable.throw('Could not add employee'));
 
-      const service : EmployeeService = new EmployeeService(httpClient, loggingService);
+      const service: EmployeeService = new EmployeeService(httpClient, loggingService);
 
-      let success: boolean = true;
+      let success = true;
 
       service.addEmployee(employee).subscribe((ignored) => {
         // success = true;
@@ -188,21 +188,21 @@ describe('EmployeeService', () => {
 
   describe('deleteEmployee', () => {
     it('should run without errors', inject([HttpClient, LoggingService],
-      (httpClient: HttpClient, loggingService : LoggingService) => {
-      spyOn(httpClient, "delete").and.returnValue(Observable.of());
+      (httpClient: HttpClient, loggingService: LoggingService) => {
+      spyOn(httpClient, 'delete').and.returnValue(Observable.of());
 
-      const service : EmployeeService = new EmployeeService(httpClient, loggingService);
+      const service: EmployeeService = new EmployeeService(httpClient, loggingService);
 
       expect(service.deleteEmployee(0)).toBeTruthy();
     }));
 
     it('should return error when delete failed', inject([HttpClient, LoggingService],
-      (httpClient: HttpClient, loggingService : LoggingService) => {
-      spyOn(httpClient, "delete").and.returnValue(Observable.throw('Could not delete employee'));
+      (httpClient: HttpClient, loggingService: LoggingService) => {
+      spyOn(httpClient, 'delete').and.returnValue(Observable.throw('Could not delete employee'));
 
-      const service : EmployeeService = new EmployeeService(httpClient, loggingService);
+      const service: EmployeeService = new EmployeeService(httpClient, loggingService);
 
-      let success: boolean = true;
+      let success = true;
 
       service.deleteEmployee(0).subscribe((ignored) => {
         // success = true;
@@ -216,23 +216,23 @@ describe('EmployeeService', () => {
 
   describe('updateEmployee', () => {
     it('should run without errors', inject([HttpClient, LoggingService],
-      (httpClient: HttpClient, loggingService : LoggingService) => {
-      const employee : Employee = new Employee(0, 'Testy', 'McTest');
-      spyOn(httpClient, "put").and.returnValue(Observable.of());
+      (httpClient: HttpClient, loggingService: LoggingService) => {
+      const employee: Employee = new Employee(0, 'Testy', 'McTest');
+      spyOn(httpClient, 'put').and.returnValue(Observable.of());
 
-      const service : EmployeeService = new EmployeeService(httpClient, loggingService);
+      const service: EmployeeService = new EmployeeService(httpClient, loggingService);
 
       expect(service.updateEmployee(employee)).toBeTruthy();
     }));
 
     it('should return error when update failed', inject([HttpClient, LoggingService],
-      (httpClient: HttpClient, loggingService : LoggingService) => {
-      const employee : Employee = new Employee(1, 'Testy', 'McTest');
-      spyOn(httpClient, "put").and.returnValue(Observable.throw('Could not update employee'));
+      (httpClient: HttpClient, loggingService: LoggingService) => {
+      const employee: Employee = new Employee(1, 'Testy', 'McTest');
+      spyOn(httpClient, 'put').and.returnValue(Observable.throw('Could not update employee'));
 
-      const service : EmployeeService = new EmployeeService(httpClient, loggingService);
+      const service: EmployeeService = new EmployeeService(httpClient, loggingService);
 
-      let success: boolean = true;
+      let success = true;
 
       service.updateEmployee(employee).subscribe(() => {
 
@@ -243,5 +243,5 @@ describe('EmployeeService', () => {
       expect(success).toBeFalsy();
     }));
 
-  })
+  });
 });

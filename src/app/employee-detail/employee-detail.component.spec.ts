@@ -20,7 +20,7 @@ import {AlertService} from '../service/alert.service';
 import {ErrorService} from '../service/error.service';
 import {APP_BASE_HREF} from '@angular/common';
 import {ErrorHandler} from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import * as _ from 'lodash';
 
 describe('EmployeeDetailComponent', () => {
@@ -71,13 +71,13 @@ describe('EmployeeDetailComponent', () => {
 
   describe('when the page is loaded', () => {
     it('the employee should be retrieved from the database', () => {
-      const employee = { id: 1, firstName: "First", lastName: "Last" };
+      const employee = { id: 1, firstName: 'First', lastName: 'Last' };
       const spy = spyOn(employeeService, 'getEmployee').and.returnValue(Observable.of(employee));
       component.ngOnInit();
       expect(_.isEqual(component.model, employee)).toBeTruthy();
     });
     it('an error should be thrown when requesting an invalid employee', () => {
-      const spy = spyOn(employeeService, 'getEmployee').and.returnValue(Observable.throw("Wrong id"));
+      const spy = spyOn(employeeService, 'getEmployee').and.returnValue(Observable.throw('Wrong id'));
       component.ngOnInit();
       expect(component.model).toBeUndefined();
     });

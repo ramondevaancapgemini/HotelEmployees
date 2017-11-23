@@ -29,7 +29,7 @@ describe('EmployeeAddComponent', () => {
   let component: EmployeeAddComponent;
   let fixture: ComponentFixture<EmployeeAddComponent>;
   let employeeService: EmployeeService;
-  
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -66,7 +66,7 @@ describe('EmployeeAddComponent', () => {
       });
   }));
 
-  
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -74,15 +74,15 @@ describe('EmployeeAddComponent', () => {
   describe('when initialized', () => {
     it('the component should contain an empty employee', () => {
       expect(_.isEqual(component.model, new Employee(-1, '', ''))).toBeTruthy();
-    })
+    });
   });
 
   describe('when the add button is clicked', () => {
     it('should not be loading', () => {
       expect(component.adding).toBeFalsy();
-    })
+    });
     it('it should add a new employee', fakeAsync(() => {
-      const spy = spyOn(employeeService, 'addEmployee').and.returnValue(Observable.of({ id: 1, firstName: "First", lastName: "Last" }));
+      const spy = spyOn(employeeService, 'addEmployee').and.returnValue(Observable.of({ id: 1, firstName: 'First', lastName: 'Last' }));
       component.onSubmit();
       fixture.detectChanges();
       expect(spy.calls.any()).toEqual(true);

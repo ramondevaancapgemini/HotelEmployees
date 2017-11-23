@@ -20,8 +20,7 @@ import { AlertService } from '../service/alert.service';
 import { ErrorService } from '../service/error.service';
 import { APP_BASE_HREF } from '@angular/common';
 import { ErrorHandler } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Employee } from '../model/Employee';
+import { Observable } from 'rxjs/Observable';
 import * as _ from 'lodash';
 import { UserData } from '../model/UserData';
 
@@ -74,9 +73,9 @@ describe('EmployeeIndexComponent', () => {
     let spy: jasmine.Spy;
     let data: UserData;
     beforeEach(() => {
-      data = { totalPages: 3, pageLimit: 2, currentPage: 1, employees: [{ id: 1, firstName: "First", lastName: "Last" }] };
+      data = { totalPages: 3, pageLimit: 2, currentPage: 1, employees: [{ id: 1, firstName: 'First', lastName: 'Last' }] };
       spy = spyOn(employeeService, 'getEmployees').and.returnValue(Observable.of(data));
-    })
+    });
     it('the list of employees should be requested', () => {
       component.ngOnInit();
       expect(spy.calls.any()).toBeTruthy();
@@ -103,17 +102,17 @@ describe('EmployeeIndexComponent', () => {
 
   describe('when a table page is requested', () => {
     it('the list of employees should be loaded', () => {
-      let data = { totalPages: 3, pageLimit: 2, currentPage: 1, employees: [{ id: 1, firstName: "First", lastName: "Last" }] };
-      let spy = spyOn(employeeService, 'getEmployees').and.returnValue(Observable.of(data));
+      const data = { totalPages: 3, pageLimit: 2, currentPage: 1, employees: [{ id: 1, firstName: 'First', lastName: 'Last' }] };
+      const spy = spyOn(employeeService, 'getEmployees').and.returnValue(Observable.of(data));
       component.loadPage(1);
       expect(spy.calls.any()).toBeTruthy();
     });
     it('the requested page should be loaded', () => {
-      let data = { totalPages: 3, pageLimit: 2, currentPage: 2, employees: [{ id: 1, firstName: "First", lastName: "Last" }] };
+      const data = { totalPages: 3, pageLimit: 2, currentPage: 2, employees: [{ id: 1, firstName: 'First', lastName: 'Last' }] };
       spyOn(employeeService, 'getEmployees').and.returnValue(Observable.of(data));
       component.loadPage(2);
       expect(component.currentPage).toBe(2);
-    })
+    });
     describe('and the requested page was negative', () => {
       it('the first page should be loaded', () => {
         component.loadPage(-4);
@@ -134,18 +133,18 @@ describe('EmployeeIndexComponent', () => {
 
   describe('when an amount of employees is requested', () => {
     it('the first page of employees should be loaded', () => {
-      let data = { totalPages: 3, pageLimit: 2, currentPage: 5, employees: [{ id: 1, firstName: "First", lastName: "Last" }] };
+      const data = { totalPages: 3, pageLimit: 2, currentPage: 5, employees: [{ id: 1, firstName: 'First', lastName: 'Last' }] };
       component.loadAmount(1);
       spyOn(employeeService, 'getEmployees').and.callFake(function () {
         expect(arguments[0].template).toEqual(1);
       });
     });
     it('that many employees should be displayed', () => {
-      let employeeList = [{ id: 1, firstName: "First", lastName: "Last" }, { id: 2, firstName: "First", lastName: "Last" }];
-      let data = { totalPages: 3, pageLimit: 2, currentPage: 1, employees: employeeList };
+      const employeeList = [{ id: 1, firstName: 'First', lastName: 'Last' }, { id: 2, firstName: 'First', lastName: 'Last' }];
+      const data = { totalPages: 3, pageLimit: 2, currentPage: 1, employees: employeeList };
       spyOn(employeeService, 'getEmployees').and.returnValue(Observable.of(data));
       component.loadAmount(2);
       expect(component.employees.length).toBe(2);
-    })
-  })
+    });
+  });
 });
