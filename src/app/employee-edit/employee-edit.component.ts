@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as _ from 'lodash';
 
-import {Employee} from '../model/Employee';
-import {EmployeeService} from '../service/employee.service';
-import {AlertService} from '../service/alert.service';
+import { Employee } from '../model/Employee';
+import { EmployeeService } from '../service/employee.service';
+import { AlertService } from '../service/alert.service';
 
 @Component({
   selector: 'app-employee-edit',
@@ -18,9 +18,9 @@ export class EmployeeEditComponent implements OnInit {
   updating: boolean;
 
   constructor(private employeeService: EmployeeService,
-              private alertService: AlertService,
-              private route: ActivatedRoute,
-              private router: Router) {
+    private alertService: AlertService,
+    private route: ActivatedRoute,
+    private router: Router) {
 
   }
 
@@ -32,15 +32,15 @@ export class EmployeeEditComponent implements OnInit {
     this.updating = true;
     this.employeeService.updateEmployee(this.model)
       .subscribe(
-        ignored => {
-          this.alertService.success('Changes saved');
-          this.router.navigate(['/employees']);
-          this.updating = false;
-        },
-        ignored => {
-          this.alertService.error('Error updating employee');
-          this.updating = false;
-        });
+      ignored => {
+        this.alertService.success('Changes saved');
+        this.router.navigate(['/employees']);
+        this.updating = false;
+      },
+      ignored => {
+        this.alertService.error('Error updating employee');
+        this.updating = false;
+      });
   }
 
   resetEmployee() {
