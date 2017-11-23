@@ -1,6 +1,6 @@
 <h1>Employees</h1>
 
-<a vertical-align="middle" class="btn btn-primary" routerLink="/add">
+<a vertical-align="middle" class="btn btn-primary" id="add-button" routerLink="/add">
   <i class="fa fa-plus" aria-hidden="true"></i>
   <strong>Add</strong>
 </a>
@@ -9,7 +9,7 @@
 
   <input type="text" class="form-control filter-field" id="filter" [(ngModel)]="filter" name="filter" placeholder="Filter...">
 
-  <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button type="button" class="btn btn-outline-primary dropdown-toggle" id="page-limit" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     {{pageLimit}}
   </button>
   <div class="dropdown-menu">
@@ -55,7 +55,7 @@
   <span class="sr-only">Loading...</span>
 </div>
 
-<nav aria-label="Page navigation">
+<nav aria-label="Page navigation" id="pagination">
   <ul class="pagination disabled">
     <li class="page-item" [class.disabled]="currentPage <= 1">
       <a class="page-link" (click)="loadPage(currentPage - 1)">Previous</a>

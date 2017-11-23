@@ -15,8 +15,7 @@
 
 <ng-template #modelContainer>
   <div class="details">
-    <img *ngIf="model.avatar" class="img-fluid rounded mx-auto d-block" src="{{model.avatar}}"
-         alt="No preview available.">
+    <img *ngIf="model.avatar" class="img-fluid rounded mx-auto d-block" src="{{model.avatar}}" alt="No preview available.">
     <p>
       <strong>First name:</strong>
       {{model.firstName}}
@@ -26,10 +25,12 @@
     </p>
   </div>
   <p>Are you sure you want to delete {{model.firstName}} {{model.lastName}}?</p>
-  <button type="button" class="btn btn-danger" [disabled]="deleting" (click)="doDelete()">
-    <i class="fa fa-trash-o fa-lg"></i> Delete
-  </button>
-  <button type="button" class="btn btn-secondary" routerLink="/employees">Back</button>
+  <div id="buttons">
+    <button type="button" class="btn btn-danger" [disabled]="deleting" (click)="doDelete()">
+      <i class="fa fa-trash-o fa-lg"></i> Delete
+    </button>
+    <button type="button" class="btn btn-secondary" routerLink="/employees">Back</button>
+  </div>
 </ng-template>
 
 <ng-template #errorContainer>
