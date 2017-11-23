@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import {Employee} from '../model/Employee';
-import {EmployeeService} from '../service/employee.service';
-import {AlertService} from '../service/alert.service';
+import { Employee } from '../model/Employee';
+import { EmployeeService } from '../service/employee.service';
+import { AlertService } from '../service/alert.service';
 
 @Component({
   selector: 'app-employee-delete',
@@ -16,9 +16,9 @@ export class EmployeeDeleteComponent implements OnInit {
   loading: boolean;
 
   constructor(private employeeService: EmployeeService,
-              private alertService: AlertService,
-              private route: ActivatedRoute,
-              private router: Router) {
+    private alertService: AlertService,
+    private route: ActivatedRoute,
+    private router: Router) {
     this.deleting = false;
     this.loading = false;
   }
@@ -45,14 +45,14 @@ export class EmployeeDeleteComponent implements OnInit {
     this.deleting = true;
     this.employeeService.deleteEmployee(this.model)
       .subscribe(
-        ignored => {
-          this.alertService.success('User deleted');
-          this.router.navigate(['/employees']);
-          this.deleting = false;
-        },
-        ignored => {
-          this.alertService.error('Error deleting employee');
-          this.deleting = false;
-        });
+      ignored => {
+        this.alertService.success('User deleted');
+        this.router.navigate(['/employees']);
+        this.deleting = false;
+      },
+      ignored => {
+        this.alertService.error('Error deleting employee');
+        this.deleting = false;
+      });
   }
 }

@@ -14,8 +14,7 @@
 </ng-template>
 
 <ng-template #modelContainer>
-  <img *ngIf="model.avatar" class="img-fluid rounded mx-auto d-block" src="{{model.avatar}}"
-       alt="No preview available.">
+  <img *ngIf="model.avatar" class="img-fluid rounded mx-auto d-block" src="{{model.avatar}}" alt="No preview available.">
   <div class="details">
     <p>
       <strong>First name:</strong>
@@ -25,13 +24,15 @@
       {{model.lastName}}
     </p>
   </div>
-  <a class="btn btn-primary" routerLink="/edit/{{model.id}}">
-    <i class="fa fa-pencil-square-o fa-lg"></i> Edit
-  </a>
-  <a class="btn btn-danger" routerLink="/delete/{{model.id}}">
-    <i class="fa fa-trash-o fa-lg"></i> Delete
-  </a>
-  <button type="button" class="btn btn-secondary" routerLink="/employees">Back</button>
+  <div id="buttons">
+    <a class="btn btn-primary" routerLink="/edit/{{model.id}}">
+      <i class="fa fa-pencil-square-o fa-lg"></i> Edit
+    </a>
+    <a class="btn btn-danger" routerLink="/delete/{{model.id}}">
+      <i class="fa fa-trash-o fa-lg"></i> Delete
+    </a>
+    <button type="button" class="btn btn-secondary" routerLink="/employees">Back</button>
+  </div>
 </ng-template>
 
 <ng-template #errorContainer>
