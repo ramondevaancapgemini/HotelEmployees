@@ -5,6 +5,7 @@ import { AlertService } from "../service/alert.service";
 import { AlertType } from '../model/AlertType';
 import { Alert } from '../model/Alert';
 
+
 describe('AlertComponent', () => {
   let component: AlertComponent;
   let fixture: ComponentFixture<AlertComponent>;

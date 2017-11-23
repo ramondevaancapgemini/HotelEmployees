@@ -1,11 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import * as _ from 'lodash';
 
-import { Employee } from '../model/Employee';
-import { EmployeeService } from '../service/employee.service';
-import { AlertService } from '../service/alert.service';
+import {Employee} from '../model/Employee';
+import {EmployeeService} from '../service/employee.service';
+import {AlertService} from '../service/alert.service';
 
 @Component({
   selector: 'app-employee-edit',
@@ -16,23 +15,32 @@ export class EmployeeEditComponent implements OnInit {
   original: Employee;
   model: Employee;
   loading: boolean;
+  updating: boolean;
 
-  constructor(private employeeService: EmployeeService, private alertService: AlertService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private employeeService: EmployeeService,
+              private alertService: AlertService,
+              private route: ActivatedRoute,
+              private router: Router) {
+
+  }
 
   ngOnInit() {
     this.getEmployee();
   }
 
   onSubmit() {
+    this.updating = true;
     this.employeeService.updateEmployee(this.model)
       .subscribe(
-      employee => {
-        this.alertService.success("Changes saved");
-        this.router.navigate(["/employees"]);
-      },
-      error => {
-        this.alertService.error("Error updating the user");
-      });
+        ignored => {
+          this.alertService.success('Changes saved');
+          this.router.navigate(['/employees']);
+          this.updating = false;
+        },
+        ignored => {
+          this.alertService.error('Error updating employee');
+          this.updating = false;
+        });
   }
 
   resetEmployee() {
@@ -48,8 +56,8 @@ export class EmployeeEditComponent implements OnInit {
         this.model = _.cloneDeep<Employee>(employee);
         this.loading = false;
       },
-      error => {
-        this.alertService.error("Error loading the user");
+      ignored => {
+        this.alertService.error('Error loading employee');
         this.loading = false;
       });
   }

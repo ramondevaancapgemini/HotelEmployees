@@ -1,9 +1,9 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import {EmployeeService} from "../service/employee.service";
-import {LoggingService} from "../service/logging.service";
-import {AlertService} from "./alert.service";
-import {ErrorService} from "./error.service";
+import {EmployeeService} from './employee.service';
+import {LoggingService} from './logging.service';
+import {AlertService} from './alert.service';
+import {ErrorService} from './error.service';
 
 describe('ErrorService', () => {
   beforeEach(() => {

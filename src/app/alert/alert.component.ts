@@ -9,7 +9,7 @@ import { AlertType } from '../model/AlertType';
     styleUrls: ['./alert.component.css']
 })
 
-export class AlertComponent {
+export class AlertComponent implements OnInit {
     alerts: Alert[] = [];
 
     constructor(private alertService: AlertService) { }
