@@ -46,7 +46,11 @@ export class EmployeeDeleteComponent implements OnInit {
     this.employeeService.deleteEmployee(this.model)
       .subscribe(
       employee => {
-        this.alertService.success('Successfully deleted ' + this.model.firstName + ' ' + this.model.lastName);
+        if (this.model) {
+          this.alertService.success('Successfully deleted ' + this.model.firstName + ' ' + this.model.lastName);
+        } else {
+          this.alertService.success('User deleted');
+        }
         this.router.navigate(['/employees']);
         this.deleting = false;
       },
